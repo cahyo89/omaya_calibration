@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Calibration</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta name="generator" content="SensationThemes">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <link href="images/logo32.png" rel="shortcut icon" type="image/x-icon">
+  <link href="images/logo.png" rel="apple-touch-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <link href="css/ionicons.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <section class="mobile-wrapper">
+    <div class="w-embed">
+    </div>
+    <div class="page-content" id="main-stack">
+      <div class="navbar w-nav" data-animation="default" data-collapse="all" data-duration="700">
+        <div class="w-container">
+          <nav class="bg-gradient nav-menu w-nav-menu" role="navigation">
+            <a class="btn-close-button nav-menu-link w-clearfix w-inline-block" href="home.html">
+              <div class="icon-list-menu">
+                <div class="icon ion-android-close"></div>
+              </div>
+              <div class="nav-menu-titles">Back</div>
+            </a>
+            <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="index.html?logout=true">
+              <div class="icon-list-menu">
+                <div class="icon ion-ios-home-outline"></div>
+              </div>
+              <div class="nav-menu-titles">Logout</div>
+            </a>
+            
+            <a class="last nav-menu-link w-clearfix w-inline-block" data-load="1" href="settings.html">
+              <div class="icon-list-menu">
+                <div class="icon ion-ios-bookmarks-outline"></div>
+              </div>
+              <div class="nav-menu-titles">Settings</div>
+            </a>
+            <div class="separator-bottom"></div>
+            <div class="separator-bottom"></div>
+            <div class="separator-bottom"></div>
+          </nav>
+          <div class="wrapper-mask" data-ix="menu-mask"></div>
+          <div class="navbar-title">Calibration</div>
+          <div class="navbar-button right w-nav-button" data-ix="hide-navbar-icons" id="menu-button">
+            <div class="home-icon navbar-button-icon">
+              <div class="bar-home-icon top"></div>
+              <div class="bar-home-icon middle"></div>
+              <div class="bar-home-icon bottom"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div id="floor_plan" style="height: 600px;"></div>
+        <div class="separator-fields"></div>
+        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+          <div style="width: 80%;">
+            <button class="action-button" type="button" onclick="reset_cal();">Reset Calibration</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="loading-mask page-content" id="new-stack">
+      <div class="loading-icon">
+        <div class="icon ion-load-d navbar-button-icon"></div>
+      </div>
+    </div>
+    <progress max="100" value="0" id="ft-prog"></progress>
+  </section>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/webfont.js"></script>
+  <script type="text/javascript">
+    WebFont.load({
+      google: {
+        families: ["Montserrat:400,700"]
+      }
+    });
+  </script>
+  <script src="js/modernizr.js" type="text/javascript"></script>
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <script type="text/javascript" src="js/echarts.min.js"></script>
+  <script>
+
+    var checkLock       = false;
+    var localData       = window.localStorage;
+    var calibrate_site  = localData.getItem("omaya-site-selected");
+    var token_code      = localData.getItem("omaya-credential");
+    var omaya_server    = localData.getItem("omaya-server");
+    var mac_address     = localData.getItem("omaya-mac-address");
+
+    var totalXPoint     = localData.getItem("omaya-totalx");
+    var totalYPoint     = localData.getItem("omaya-totaly");
+    var timeOutSec      = localData.getItem("omaya-timeout");
+
+    var omanufacturer   = "";
+    var omodel          = "";
+    var oplatform       = "";
+    var oversion        = "";
+    
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady(){
+
+      omanufacturer   = device.manufacturer.toUpperCase();
+      omodel          = device.model.toUpperCase();
+      oplatform       = device.platform.toUpperCase();
+      oversion        = device.version.toUpperCase();
+
+      if (calibrate_site == "" || calibrate_site == null || calibrate_site == "Select Venue") window.href.location = "phone.html";
+
+      $.ajax({
+        url: "http://" + omaya_server + "/calibration/capture/map.php?site=" + calibrate_site + "&token=" + token_code,
+        method: "GET",
+        success: function(x){
+          if (x !== "") {
+            $("#floor_plan").css("background-image", 'url(' + x + ')');
+            $("#floor_plan").css("background-size", "100% 100%");
+            $("#floor_plan").css("background-repeat", "no-repeat");
+          }
+        }
+      });
+
+
+      var floorPlan = echarts.init(document.getElementById('floor_plan'), 'macarons');
+
+      // ///////////////////////////////////////////////////////////////////////////////
+
+      if (totalXPoint == "" || totalXPoint == "null" || totalXPoint.length == 0) totalXPoint = 5;
+      if (totalYPoint == "" || totalYPoint == "null" || totalYPoint.length == 0) totalYPoint = 8;
+
+      var data = [];
+
+      for(var x = 0; x < totalXPoint;  x++){
+        for(var y = 0; y < totalYPoint; y++){
+          data.push([x,y]);
+        }
+      }
+      
+
+      option = {
+
+          title: {
+              show : false,
+              text: calibrate_site.toUpperCase()
+          },
+          legend: {
+              show: false,
+              right: 10,
+              data: ['Position']
+          },
+          xAxis: {
+              axisLabel:{
+                  show:false
+                  
+              },
+              splitLine: {
+                  lineStyle: {
+                      type: 'dashed'
+                  }
+              },
+              minInterval : 0,
+              interval: 1,
+              axisLine: {
+                  show: false
+              }
+          },
+          yAxis: {
+              axisLabel:{
+                  show:false
+                  
+              },
+              splitLine: {
+                  lineStyle: {
+                      type: 'dashed'
+                  }
+              },
+              minInterval : 0,
+              interval: 1,
+              axisLine: {
+                  show: false
+              }
+          },
+          series: [{
+              name: 'Position',
+              data: data,
+              type: 'scatter',
+              symbolSize: 10,
+              label: {
+                  emphasis: {
+                      show: true,
+                      formatter: function (param) {
+                          return "Position: X:" + param.data[0] + " Y:" + param.data[1];
+                      },
+                      position: 'top'
+                  }
+              },
+              itemStyle: {
+                  normal: {
+                      shadowBlur: 10,
+                      shadowColor: 'rgba(120, 36, 50, 0.5)',
+                      shadowOffsetY: 5,
+                      color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                          offset: 0,
+                          color: 'rgb(251, 118, 123)'
+                      }, {
+                          offset: 1,
+                          color: 'rgb(204, 46, 72)'
+                      }])
+                  }
+              }
+          }]
+      };
+
+
+      // /////////////////////////////////////////////////////////////////////////////
+
+      floorPlan.setOption(option);
+
+      floorPlan.on('click', function (params) {
+
+        if (checkLock == false) {
+
+          checkLock = true;
+
+          var timeOut = 0;
+          var updateResult = "";
+
+          window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
+
+          $.ajax({
+            url: "http://" + omaya_server + "/calibration/capture",
+            method: "GET",
+            data:{
+              token         : token_code,
+              site          : calibrate_site,
+              manufacturer  : omanufacturer,
+              model         : omodel,
+              platform      : oplatform,
+              version       : oversion,
+              dimension     : totalXPoint + "x" + totalYPoint,
+              dtime         : new Date,
+              posx          : params['data'][0],
+              posy          : params['data'][1],
+              mac_address   : mac_address
+            },
+            success: function(returnValue){
+              updateResult = $.parseJSON(returnValue);
+            }
+
+          });
+
+          var timeInterval = window.setInterval(function(){
+
+            timeOut += 1;
+
+            if (typeof(updateResult) == "object" || timeOut > timeOutSec) {
+
+              if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
+                navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
+              } else {
+                navigator.notification.alert("We are unable to complete this request. Please try again.", null, "ERROR", "OK");
+              }
+
+              window.plugins.spinnerDialog.hide();
+              clearInterval(timeInterval);
+              checkLock = false;
+            
+            }
+
+          }, 1000);
+
+        } else {
+
+          navigator.notification.alert("You can only calibrate one position at a time.", null, "ERROR", "OK");
+
+        }
+          
+      });
+
+    }
+
+    function reset_cal(){
+
+      navigator.notification.confirm("Are you sure to reset the calibration for this site?", reset_call, "Reset Calibration", ["Confirm","Cancel"]);
+
+    }
+
+    function reset_call(x){
+
+      if (x == 1) {
+
+        $.ajax({
+          url: "http://" + omaya_server + "/calibration/capture/reset.php?site=" +  calibrate_site + "&token=" + token_code,
+          method: "GET",
+          success: function(x){
+
+            x = $.parseJSON(x);
+
+            if (x['status'] == "success") {
+              navigator.notification.alert("Calibration for this site has been reset.", null, "SUCCESS", "OK");
+              location.href = "phone.html";
+            } else {
+              navigator.notification.alert("There is an error to reset. Please try again.", null, "ERROR", "OK");
+            }
+
+          }
+
+        });
+
+      }
+
+    }
+
+</script>
+</body>
+</html>
