@@ -311,7 +311,7 @@
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
 
           $.ajax({
-            url: "http://" + omaya_server + "/calibration/capturing/"+token_code,
+            url: "http://" + omaya_server + "/calibration/capturing/"+token_code+"/",
             method: "GET",
             data:{
               token         : token_code,
