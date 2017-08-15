@@ -312,7 +312,7 @@
 
           $.ajax({
             url: "http://" + omaya_server + "/calibration/capturing/"+token_code+"/",
-            method: "GET",
+            method: "POST",
             data:{
               token         : token_code,
               site          : calibrate_site,
