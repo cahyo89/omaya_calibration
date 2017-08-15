@@ -123,11 +123,11 @@
       if (calibrate_site == null || calibrate_site == "SELECT VENUE") href.location = "phone.html";
 
       $.ajax({
-        url: "http://" + omaya_server + "/calibration/capture/map.php?site=" + calibrate_site + "&token=" + token_code,
+        url: "http://" + omaya_server + "/calibration/capture/"+ token_code"/"+calibrate_site ,
         method: "GET",
         success: function(x){
           if (x !== "" || x !== "null") {
-            create_map(x);
+            create_map(x['image'],x['size']);
           } else {
             location.href = "phone.html";
           }
@@ -168,14 +168,15 @@
     }
 
 
-    function create_map(map_path){
+    function create_map(map_path,map_size){
 
       var floorPlan = echarts.init(document.getElementById('floor_plan'), 'macarons');
 
       // ///////////////////////////////////////////////////////////////////////////////
 
       if (totalPoint == null) totalPoint    = "5,8";
-      if (mapSize    == null) mapSize       = "600,600";
+      //if (mapSize    == null) mapSize       = "600,600";
+      if (mapSize    == null) mapSize       = map_size;
       if (timeOutSec == null) timeOutSec    = 30;
       if (opadding   == null) opadding      = "5,5,5,5";
       if (oposition  == null) oposition     = "center,center";
