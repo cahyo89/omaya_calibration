@@ -126,6 +126,7 @@
         url: "http://" + omaya_server + "/calibration/capture/"+ token_code"/"+calibrate_site ,
         method: "GET",
         success: function(x){
+          navigator.notification.alert(x, null, "ERROR", "OK");
           if (x !== "" || x !== "null") {
             create_map(x['image'],x['size']);
           } else {
