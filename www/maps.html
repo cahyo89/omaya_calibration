@@ -123,7 +123,7 @@
       if (calibrate_site == null || calibrate_site == "SELECT VENUE") href.location = "phone.html";
 
       $.ajax({
-        url: "http://" + omaya_server + "/calibration/capture/"+ token_code"/"+calibrate_site ,
+        url: "http://" + omaya_server + "/calibration/capture/"+ token_code+"/"+calibrate_site ,
         method: "GET",
         success: function(x){
         console.log(x);
