@@ -127,10 +127,10 @@
         method: "GET",
         success: function(x){
         console.log(x);
-        console.log(x['size']);
-        console.log(x['image']);
+        console.log(x.size);
+        console.log(x.image);
           if (x !== "" || x !== "null") {
-            create_map(x['image'],x['size']);
+            create_map(x.image,x.size);
           } else {
             location.href = "phone.html";
           }
