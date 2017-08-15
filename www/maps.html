@@ -127,6 +127,8 @@
         method: "GET",
         success: function(x){
         console.log(x);
+        console.log(x['size']);
+        console.log(x['image']);
           if (x !== "" || x !== "null") {
             create_map(x['image'],x['size']);
           } else {
@@ -181,7 +183,7 @@
       if (timeOutSec == null) timeOutSec    = 30;
       if (opadding   == null) opadding      = "5,5,5,5";
       if (oposition  == null) oposition     = "center,center";
-
+      console.log(mapSize);
       totalPoint  = totalPoint.split(",");
       mapSize     = mapSize.split(",");
       opadding    = opadding.split(",");
