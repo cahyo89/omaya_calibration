@@ -337,40 +337,40 @@
           var ydata=(totalPoint[1]-params['data'][1])-1;
      
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
-
-          $.ajax({
-            url: "http://" + omaya_server + "/calibration/capturing/"+token_code+"/",
-            method: "POST",
-            data:{
-              token         : token_code,
-              site          : calibrate_site,
-              manufacturer  : omanufacturer,
-              model         : omodel,
-              platform      : oplatform,
-              version       : oversion,
-              dimension     : totalPoint.join(),
-              dtime         : new Date,
-              posx          : params['data'][0],
-              posy          : params['data'][1],
-              picx          : (params['data'][0]*ratiox),
-              picy          : (ydata*ratioy),
-              mac_address   : encodeURIComponent(mac_address),
-              padding       : opadding.join(),
-              position      : oposition[0] + "," + oposition[1],
-              map_size      : mapSize.join()
-            },
-            success: function(returnValue){
-              updateResult = $.parseJSON(returnValue);
-            }
-
-          });
+          var timestamp=new Date;
+         
           timeOut=0;
           var timeInterval = window.setInterval(function(){
 
             timeOut += 1;
 
-            if (typeof(updateResult) == "object" && timeOut > timeOutSec) {
-
+            // if (typeof(updateResult) == "object" && timeOut > timeOutSec) {
+            if (timeOut > timeOutSec) {
+               $.ajax({
+                url: "http://" + omaya_server + "/calibration/capturing/"+token_code+"/",
+                method: "POST",
+                data:{
+                  token         : token_code,
+                  site          : calibrate_site,
+                  manufacturer  : omanufacturer,
+                  model         : omodel,
+                  platform      : oplatform,
+                  version       : oversion,
+                  dimension     : totalPoint.join(),
+                  dtime         : timestamp,
+                  posx          : params['data'][0],
+                  posy          : params['data'][1],
+                  picx          : (params['data'][0]*ratiox),
+                  picy          : (ydata*ratioy),
+                  mac_address   : encodeURIComponent(mac_address),
+                  padding       : opadding.join(),
+                  position      : oposition[0] + "," + oposition[1],
+                  map_size      : mapSize.join()
+                },
+                success: function(returnValue){
+                  updateResult = $.parseJSON(returnValue);
+                }
+              });
               if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
                 navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
               } else {
