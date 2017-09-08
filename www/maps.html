@@ -10,23 +10,24 @@
   <link href="css/styles.css" rel="stylesheet" type="text/css">
   <link href="images/logo32.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/logo.png" rel="apple-touch-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <section class="mobile-wrapper">
-    <div class="w-embed">
-    </div>
+    <div class="w-embed"></div>
     <div class="page-content" id="main-stack">
       <div class="navbar w-nav" data-animation="default" data-collapse="all" data-duration="700">
         <div class="w-container">
           <nav class="bg-gradient nav-menu w-nav-menu" role="navigation">
+
             <a class="btn-close-button nav-menu-link w-clearfix w-inline-block" href="home.html">
               <div class="icon-list-menu">
                 <div class="icon ion-android-close"></div>
               </div>
               <div class="nav-menu-titles">Back</div>
             </a>
+
             <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="index.html?logout=true">
               <div class="icon-list-menu">
                 <div class="icon ion-ios-home-outline"></div>
@@ -40,12 +41,26 @@
               </div>
               <div class="nav-menu-titles">Settings</div>
             </a>
+
+            <a class="last nav-menu-link w-clearfix w-inline-block" data-load="1" href="#" onclick="complete_calibration();">
+              <div class="icon-list-menu">
+                <div class="icon ion-ios-bookmarks-outline"></div>
+              </div>
+              <div class="nav-menu-titles">Complete Calibration</div>
+            </a>
+
+            <a class="last nav-menu-link w-clearfix w-inline-block" data-load="1" href="#" onclick="reset_cal();">
+              <div class="icon-list-menu">
+                <div class="icon ion-ios-bookmarks-outline"></div>
+              </div>
+              <div class="nav-menu-titles">Reset Calibration</div>
+            </a>
+
             <div class="separator-bottom"></div>
-            <div class="separator-bottom"></div>
-            <div class="separator-bottom"></div>
+
           </nav>
           <div class="wrapper-mask" data-ix="menu-mask"></div>
-          <div class="navbar-title">Calibration</div>
+          <div class="navbar-title">Calibration <span id="site-name"></span> </div>
           <div class="navbar-button right w-nav-button" data-ix="hide-navbar-icons" id="menu-button">
             <div class="home-icon navbar-button-icon">
               <div class="bar-home-icon top"></div>
@@ -56,12 +71,8 @@
         </div>
       </div>
       <div class="body">
-        <div id="floor_plan" style="height: 600px;overflow: auto;"></div>
-        <div class="separator-fields"></div>
-        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
-          <div style="width: 80%;">
-            <button class="action-button" type="button" onclick="reset_cal();">Reset Calibration</button>
-          </div>
+        <div id="map_viewport">
+          <div id="floor_plan"></div>
         </div>
       </div>
     </div>
@@ -115,6 +126,12 @@
 
     function onDeviceReady(){
 
+      $("#site-name").html(" ( " + calibrate_site + " )");
+
+      $("#map_viewport").css("width", $(window).width() + "px");
+      $("#map_viewport").css("height", $(window).height() + "px");
+      $("#map_viewport").css("overflow", "scroll");
+
       omanufacturer   = device.manufacturer.toUpperCase();
       omodel          = device.model.toUpperCase();
       oplatform       = device.platform.toUpperCase();
@@ -126,17 +143,18 @@
         url: "http://" + omaya_server + "/calibration/capture/"+ token_code+"/"+calibrate_site ,
         method: "GET",
         success: function(x){
-        console.log(x);
-        x = $.parseJSON(x);
-        console.log(x['size']);
-        console.log(x['image']);
+
+          x = $.parseJSON(x);
+
           if (x !== "" || x !== "null") {
             localData.setItem("omaya-mapsize" , x['size']);
-            create_map(x['image'],x['size']);
+            create_map(x['image'], x['size']);
           } else {
             location.href = "phone.html";
           }
+
         }
+
       });
     }
 
@@ -175,21 +193,28 @@
 
     function create_map(map_path,map_size){
 
-      var floorPlan = echarts.init(document.getElementById('floor_plan'), 'macarons');
+      mapSize = map_size;
 
       // ///////////////////////////////////////////////////////////////////////////////
 
       if (totalPoint == null) totalPoint    = "5,8";
-      //if (mapSize    == null) mapSize       = "600,600";
-      if (mapSize    == null) mapSize       = map_size;
+      if (mapSize    == null) mapSize       = "600,600";
       if (timeOutSec == null) timeOutSec    = 30;
       if (opadding   == null) opadding      = "5,5,5,5";
       if (oposition  == null) oposition     = "center,center";
-      console.log(mapSize);
+
+
       totalPoint  = totalPoint.split(",");
       mapSize     = mapSize.split(",");
       opadding    = opadding.split(",");
       oposition   = oposition.split(",");
+
+      // resize plan space to follow image size
+      var floorplan = $("#floor_plan");
+      floorplan.css("width", mapSize[0]);
+      floorplan.css("height", mapSize[1]);
+
+      var floorPlan = echarts.init(document.getElementById('floor_plan'), 'macarons');
 
       var data = [];
 
@@ -198,7 +223,6 @@
           data.push([x,y]);
         }
       }
-      
 
       option = {
 
@@ -363,6 +387,32 @@
         }
           
       });
+
+    }
+
+    function complete_calibration(){
+
+        $.ajax({
+            url: "http://" + omaya_server + "/calibration/capturing/"+token_code+"/",
+            method: "POST",
+            data:{
+                token         : token_code,
+                site          : calibrate_site,
+                status        : "complete"
+            },
+            success: function(x){
+
+                navigator.notification.alert("Calibration has been saved.", null, "SUCCESS", "OK");
+                location.href = "index.html";
+
+            },
+            error: function(x){
+
+                navigator.notification.alert("There is an error to saved your calibration. Please retry.", null, "ERROR", "OK");
+
+            }
+
+        });
 
     }
 
