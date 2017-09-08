@@ -374,7 +374,8 @@
               if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
                 navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
               } else {
-                navigator.notification.alert("We are unable to complete this request. Please try again.", null, "ERROR", "OK");
+                // navigator.notification.alert("We are unable to complete this request. Please try again.", null, "ERROR", "OK");
+                navigator.notification.alert(updateResult['message'], null, "ERROR", "OK");
               }
 
               window.plugins.spinnerDialog.hide();
