@@ -340,6 +340,10 @@
           console.log('offset top :'+document.getElementById('floor_plan').offsetTop);
           console.log('only top :'+document.getElementById('floor_plan').top);
           console.log('only left :'+document.getElementById('floor_plan').left);
+          var ratiox=mapSize[0]/totalPoint[0];
+          var ratioy=mapSize[1]/totalPoint[1];
+          console.log('ratio x :'+(params['data'][0]*ratiox));
+          console.log('ratio y :'+(params['data'][1]*ratioy));
      
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
 
