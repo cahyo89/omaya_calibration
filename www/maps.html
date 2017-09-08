@@ -336,9 +336,11 @@
     // var axisX=params.clientX - offset.left;
     // var axisY=params.clientY - offset.top;
           console.log(params);
-          console.log(document.getElementById('floor_plan').offsetLeft);
-          console.log(document.getElementById('floor_plan').offsetTop);
-          console.log(param.pageX);
+          console.log('offset left :'+document.getElementById('floor_plan').offsetLeft);
+          console.log('offset top :'+document.getElementById('floor_plan').offsetTop);
+          console.log('only top :'+document.getElementById('floor_plan').top);
+          console.log('only left :'+document.getElementById('floor_plan').left);
+     
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
 
           $.ajax({
