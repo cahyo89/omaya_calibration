@@ -335,7 +335,9 @@
           var offset = $(this).offset();
     var axisX=params.clientX - offset.left;
     var axisY=params.clientY - offset.top;
-          console.log("coor : "+axisX+","+axisY);
+          console.log(params);
+          console.log(offset);
+          console.log($(this));
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
 
           $.ajax({
