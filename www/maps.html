@@ -364,12 +364,12 @@
             }
 
           });
-
+          timeOut=0;
           var timeInterval = window.setInterval(function(){
 
             timeOut += 1;
 
-            if (typeof(updateResult) == "object" || timeOut > timeOutSec) {
+            if (typeof(updateResult) == "object" && timeOut > timeOutSec) {
 
               if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
                 navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
