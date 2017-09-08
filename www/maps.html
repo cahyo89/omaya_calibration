@@ -332,15 +332,9 @@
 
           var timeOut = 0;
           var updateResult = "";
-          var offset = $(this).offset();
-    // var axisX=params.clientX - offset.left;
-    // var axisY=params.clientY - offset.top;
-         
           var ratiox=mapSize[0]/totalPoint[0];
           var ratioy=mapSize[1]/totalPoint[1];
           var ydata=totalPoint[1]-params['data'][1];
-          console.log('ratio x :'+(params['data'][0]*ratiox));
-          console.log('ratio y :'+(ydata*ratioy));
      
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
 
@@ -358,6 +352,8 @@
               dtime         : new Date,
               posx          : params['data'][0],
               posy          : params['data'][1],
+              picx          : (params['data'][0]*ratiox),
+              picy          : (ydata*ratioy),
               mac_address   : encodeURIComponent(mac_address),
               padding       : opadding.join(),
               position      : oposition[0] + "," + oposition[1],
