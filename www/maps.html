@@ -333,8 +333,8 @@
           var timeOut = 0;
           var updateResult = "";
           var offset = $(this).offset();
-    var axisX=e.clientX - offset.left;
-    var axisY=e.clientY - offset.top;
+    var axisX=params.clientX - offset.left;
+    var axisY=params.clientY - offset.top;
           console.log("coor : "+axisX+","+axisY);
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
 
