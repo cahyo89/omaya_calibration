@@ -335,15 +335,12 @@
           var offset = $(this).offset();
     // var axisX=params.clientX - offset.left;
     // var axisY=params.clientY - offset.top;
-          console.log(params);
-          console.log('offset left :'+document.getElementById('floor_plan').offsetLeft);
-          console.log('offset top :'+document.getElementById('floor_plan').offsetTop);
-          console.log('only top :'+document.getElementById('floor_plan').top);
-          console.log('only left :'+document.getElementById('floor_plan').left);
+         
           var ratiox=mapSize[0]/totalPoint[0];
           var ratioy=mapSize[1]/totalPoint[1];
+          var ydata=totalPoint[1]-params['data'][1];
           console.log('ratio x :'+(params['data'][0]*ratiox));
-          console.log('ratio y :'+(params['data'][1]*ratioy));
+          console.log('ratio y :'+(ydata*ratioy));
      
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
 
