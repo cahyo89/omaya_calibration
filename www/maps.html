@@ -369,9 +369,10 @@
                 },
                 success: function(returnValue){
                   updateResult = $.parseJSON(returnValue);
+               console.log('return : '+returnValue);
                 }
               });
-               console.log(updateResult);
+               console.log('update : '+updateResult);
               if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
                 navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
               } else {
