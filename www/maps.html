@@ -398,7 +398,8 @@
                               }
 
                             });
-
+                           console.log(typeof(updateResult));
+                           console.log(updateResult);
                         if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
                           navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
                         } else {
