@@ -69,6 +69,9 @@
         },
         "com-badrit-macaddress": {
             "PACKAGE_NAME": "com.synchroweb.omaya"
+        },
+        "com.danishin.wifiwizard": {
+            "PACKAGE_NAME": "com.synchroweb.omaya"
         }
     },
     "dependent_plugins": {

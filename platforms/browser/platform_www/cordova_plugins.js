@@ -618,6 +618,14 @@ module.exports = [
         "clobbers": [
             "window.MacAddress"
         ]
+    },
+    {
+        "file": "plugins/com.danishin.wifiwizard/www/WifiWizard.js",
+        "id": "com.danishin.wifiwizard.WifiWizard",
+        "pluginId": "com.danishin.wifiwizard",
+        "clobbers": [
+            "window.WifiWizard"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -645,7 +653,8 @@ module.exports.metadata =
     "cordova-plugin-vibration": "2.1.5",
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-spinner-dialog": "1.3.1",
-    "com-badrit-macaddress": "0.2.1"
+    "com-badrit-macaddress": "0.2.1",
+    "com.danishin.wifiwizard": "0.2.11"
 }
 // BOTTOM OF METADATA
 });

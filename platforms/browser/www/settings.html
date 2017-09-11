@@ -64,18 +64,28 @@
             <!----------------------- form start ---------------------------------->
             
             <div>
-              <label class="label-form" for="">X Point (number of point)</label>
-              <input class="input-form w-input" data-name="pointx" id="pointx" maxlength="256" name="pointx" type="text">
-              <div class="separator-fields"></div>
-            </div>
-            <div>
-              <label class="label-form" for="">Y Point (number of point)</label>
-              <input class="input-form w-input" data-name="pointy" id="pointy" maxlength="256" name="pointy" type="text">
-              <div class="separator-fields"></div>
-            </div>
-            <div>
-              <label class="label-form" for="">Time Out (for sending data to server)</label>
+              <label class="label-form" for="">Capture Time Out</label>
               <input class="input-form w-input" data-name="timeout" id="timeout" maxlength="256" name="timeout" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="">Number Point (Column,Row)</label>
+              <input class="input-form w-input" data-name="point" id="point" maxlength="256" name="point" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="">Padding</label>
+              <input class="input-form w-input" data-name="padding" id="padding" maxlength="256" name="padding" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="">Map Size</label>
+              <input class="input-form w-input" data-name="mapsize" id="mapsize" maxlength="256" name="mapsize" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="">Map Position</label>
+              <input class="input-form w-input" data-name="gposition" id="gposition" maxlength="256" name="gposition" type="text">
               <div class="separator-fields"></div>
             </div>
 
@@ -111,22 +121,28 @@
     document.addEventListener("deviceready", onDeviceReady, false);
     var localData = window.localStorage;
 
-    var totalXPoint     = localData.getItem("omaya-totalx");
-    var totalYPoint     = localData.getItem("omaya-totaly");
+    var totalPoint      = localData.getItem("omaya-total");
+    var mapSize         = localData.getItem("omaya-mapsize");
     var timeOutSec      = localData.getItem("omaya-timeout");
+    var opadding        = localData.getItem("omaya-padding");
+    var oposition       = localData.getItem("omaya-position");
     
     function onDeviceReady(){
 
       // dummy value
 
-      if (totalXPoint == "" || totalXPoint == "null" || totalXPoint.length == 0)  totalXPoint = 5;
-      if (totalYPoint == "" || totalYPoint == "null" || totalYPoint.length == 0)  totalYPoint = 8;
-      if (timeOutSec == ""  || timeOutSec == "null"  || timeOutSec.length == 0)   timeOutSec = 8;
+      if (totalPoint  == null) totalPoint = "5,8";
+      if (mapSize     == null) mapSize     = "600,600";
+      if (timeOutSec  == null) timeOutSec  = 30;
+      if (opadding    == null) opadding    = "5,5,5,5";
+      if (oposition   == null) oposition   = "center,center";
       
 
-      $("#pointx").val(totalXPoint);
-      $("#pointy").val(totalYPoint);
+      $("#point").val(totalPoint);
+      $("#mapsize").val(mapSize);
       $("#timeout").val(timeOutSec);
+      $("#padding").val(opadding);
+      $("#gposition").val(oposition);
 
     }
 
@@ -134,17 +150,23 @@
 
         e.preventDefault();
 
-        totalXPoint     = $("#pointx").val();
-        totalYPoint     = $("#pointy").val();
+        totalPoint      = $("#point").val();
+        mapSize         = $("#mapsize").val();
         timeOutSec      = $("#timeout").val();
+        opadding        = $("#padding").val();
+        oposition       = $("#gposition").val();
 
-        if (totalXPoint == "" || totalXPoint == "null" || totalXPoint.length == 0)  totalXPoint = 5;
-        if (totalYPoint == "" || totalYPoint == "null" || totalYPoint.length == 0)  totalYPoint = 8;
-        if (timeOutSec == ""  || timeOutSec == "null"  || timeOutSec.length == 0)   timeOutSec = 8;
+        if (totalPoint  == null) totalPoint = "5,8";
+        if (mapSize     == null) mapSize    = "600,600";
+        if (timeOutSec  == null) timeOutSec = 30;
+        if (opadding    == null) opadding   = "5,5,5,5";
+        if (oposition   == null) oposition  = "center,center";
 
-        localData.setItem("omaya-totalx", totalXPoint);
-        localData.setItem("omaya-totaly", totalYPoint);
-        localData.setItem("omaya-timeout", timeOutSec);
+        localData.setItem("omaya-total"   , totalPoint);
+        localData.setItem("omaya-mapsize" , mapSize);
+        localData.setItem("omaya-timeout" , timeOutSec);
+        localData.setItem("omaya-padding" , opadding);
+        localData.setItem("omaya-position", oposition);
 
         navigator.notification.alert("Update successful. You need to redo the calibration.", null, "SUCCESS", "OK");
 

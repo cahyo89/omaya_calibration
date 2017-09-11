@@ -10,23 +10,24 @@
   <link href="css/styles.css" rel="stylesheet" type="text/css">
   <link href="images/logo32.png" rel="shortcut icon" type="image/x-icon">
   <link href="images/logo.png" rel="apple-touch-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=yes">
   <link href="css/ionicons.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <section class="mobile-wrapper">
-    <div class="w-embed">
-    </div>
+    <div class="w-embed"></div>
     <div class="page-content" id="main-stack">
       <div class="navbar w-nav" data-animation="default" data-collapse="all" data-duration="700">
         <div class="w-container">
           <nav class="bg-gradient nav-menu w-nav-menu" role="navigation">
+
             <a class="btn-close-button nav-menu-link w-clearfix w-inline-block" href="home.html">
               <div class="icon-list-menu">
                 <div class="icon ion-android-close"></div>
               </div>
               <div class="nav-menu-titles">Back</div>
             </a>
+
             <a class="nav-menu-link w-clearfix w-inline-block" data-load="1" href="index.html?logout=true">
               <div class="icon-list-menu">
                 <div class="icon ion-ios-home-outline"></div>
@@ -40,12 +41,26 @@
               </div>
               <div class="nav-menu-titles">Settings</div>
             </a>
+
+            <a class="last nav-menu-link w-clearfix w-inline-block" data-load="1" href="#" onclick="complete_calibration();">
+              <div class="icon-list-menu">
+                <div class="icon ion-ios-bookmarks-outline"></div>
+              </div>
+              <div class="nav-menu-titles">Complete Calibration</div>
+            </a>
+
+            <a class="last nav-menu-link w-clearfix w-inline-block" data-load="1" href="#" onclick="reset_cal();">
+              <div class="icon-list-menu">
+                <div class="icon ion-ios-bookmarks-outline"></div>
+              </div>
+              <div class="nav-menu-titles">Reset Calibration</div>
+            </a>
+
             <div class="separator-bottom"></div>
-            <div class="separator-bottom"></div>
-            <div class="separator-bottom"></div>
+
           </nav>
           <div class="wrapper-mask" data-ix="menu-mask"></div>
-          <div class="navbar-title">Calibration</div>
+          <div class="navbar-title">Calibration <span id="site-name"></span> </div>
           <div class="navbar-button right w-nav-button" data-ix="hide-navbar-icons" id="menu-button">
             <div class="home-icon navbar-button-icon">
               <div class="bar-home-icon top"></div>
@@ -56,12 +71,8 @@
         </div>
       </div>
       <div class="body">
-        <div id="floor_plan" style="height: 600px;"></div>
-        <div class="separator-fields"></div>
-        <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
-          <div style="width: 80%;">
-            <button class="action-button" type="button" onclick="reset_cal();">Reset Calibration</button>
-          </div>
+        <div id="map_viewport">
+          <div id="floor_plan"></div>
         </div>
       </div>
     </div>
@@ -86,6 +97,8 @@
   <script src="js/webflow.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/echarts.min.js"></script>
+
+
   <script>
 
     var checkLock       = false;
@@ -104,16 +117,25 @@
     var timeOutSec      = localData.getItem("omaya-timeout");
     var opadding        = localData.getItem("omaya-padding");
     var oposition       = localData.getItem("omaya-position");
+    var map_point_size  = localData.getItem("omaya-mappoint");
 
     // current device information
     var omanufacturer   = "";
     var omodel          = "";
     var oplatform       = "";
     var oversion        = "";
+
+    var omaya_networks  = [];
     
     document.addEventListener("deviceready", onDeviceReady, false);
 
     function onDeviceReady(){
+
+      $("#site-name").html(" ( " + calibrate_site + " )");
+
+      $("#map_viewport").css("width", $(window).width() + "px");
+      $("#map_viewport").css("height", $(window).height() + "px");
+      $("#map_viewport").css("overflow", "scroll");
 
       omanufacturer   = device.manufacturer.toUpperCase();
       omodel          = device.model.toUpperCase();
@@ -123,16 +145,23 @@
       if (calibrate_site == null || calibrate_site == "SELECT VENUE") href.location = "phone.html";
 
       $.ajax({
-        url: "http://" + omaya_server + "/calibration/capture/map.php?site=" + calibrate_site + "&token=" + token_code,
+        url: "http://" + omaya_server + "/calibration/capture/"+ token_code+"/"+calibrate_site ,
         method: "GET",
         success: function(x){
+
+          x = $.parseJSON(x);
+
           if (x !== "" || x !== "null") {
-            create_map(x);
+            localData.setItem("omaya-mapsize" , x['size']);
+            create_map(x['image'], x['size']);
           } else {
             location.href = "phone.html";
           }
+
         }
+
       });
+      
     }
 
     function reset_cal(){
@@ -168,22 +197,32 @@
     }
 
 
-    function create_map(map_path){
+    function create_map(map_path,map_size){
 
-      var floorPlan = echarts.init(document.getElementById('floor_plan'), 'macarons');
+      mapSize = map_size;
 
       // ///////////////////////////////////////////////////////////////////////////////
 
-      if (totalPoint == null) totalPoint    = "5,8";
-      if (mapSize    == null) mapSize       = "600,600";
-      if (timeOutSec == null) timeOutSec    = 30;
-      if (opadding   == null) opadding      = "5,5,5,5";
-      if (oposition  == null) oposition     = "center,center";
+      if (totalPoint      == null) totalPoint         = "5,8";
+      if (mapSize         == null) mapSize            = "600,600";
+      if (timeOutSec      == null) timeOutSec         = 30;
+      if (opadding        == null) opadding           = "5,5,5,5";
+      if (oposition       == null) oposition          = "center,center";
+      if (map_point_size  == null) map_point_size     = "20";
+      
+
 
       totalPoint  = totalPoint.split(",");
       mapSize     = mapSize.split(",");
       opadding    = opadding.split(",");
       oposition   = oposition.split(",");
+
+      // resize plan space to follow image size
+      var floorplan = $("#floor_plan");
+      floorplan.css("width", mapSize[0]);
+      floorplan.css("height", mapSize[1]);
+
+      var floorPlan = echarts.init(document.getElementById('floor_plan'), 'macarons');
 
       var data = [];
 
@@ -192,7 +231,6 @@
           data.push([x,y]);
         }
       }
-      
 
       option = {
 
@@ -262,7 +300,7 @@
               name: 'Position',
               data: data,
               type: 'scatter',
-              symbolSize: 10,
+              symbolSize: map_point_size,
               label: {
                   emphasis: {
                       show: true,
@@ -305,51 +343,88 @@
 
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
 
-          $.ajax({
-            url: "http://" + omaya_server + "/calibration/capture",
-            method: "GET",
-            data:{
-              token         : token_code,
-              site          : calibrate_site,
-              manufacturer  : omanufacturer,
-              model         : omodel,
-              platform      : oplatform,
-              version       : oversion,
-              dimension     : totalPoint.join(),
-              dtime         : new Date,
-              posx          : params['data'][0],
-              posy          : params['data'][1],
-              mac_address   : encodeURIComponent(mac_address),
-              padding       : opadding.join(),
-              position      : oposition[0] + "," + oposition[1],
-              map_size      : mapSize.join()
-            },
-            success: function(returnValue){
-              updateResult = $.parseJSON(returnValue);
-            }
+          WifiWizard.startScan(function(x){ 
 
-          });
+            window.setTimeout(function(){
 
-          var timeInterval = window.setInterval(function(){
+              WifiWizard.getScanResults(function(z){
 
-            timeOut += 1;
+                omaya_networks  = [];
 
-            if (typeof(updateResult) == "object" || timeOut > timeOutSec) {
+                for (var i = z.length - 1; i >= 0; i--) {
+                  omaya_networks.push({"SSID": z[i]['SSID'], "RSSI": z[i]['level']});
+                }
 
-              if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
-                navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
-              } else {
-                navigator.notification.alert("We are unable to complete this request. Please try again.", null, "ERROR", "OK");
-              }
+                omaya_networks = encodeURIComponent(btoa(JSON.stringify(omaya_networks)));
 
-              window.plugins.spinnerDialog.hide();
-              clearInterval(timeInterval);
-              checkLock = false;
-            
-            }
+                navigator.accelerometer.getCurrentAcceleration(function(x){
+                  
+                  $.ajax({
+                    url: "http://" + omaya_server + "/calibration/capturing/" + token_code + "/",
+                    method: "POST",
+                    data:{
+                      token         : token_code,
+                      site          : calibrate_site,
+                      manufacturer  : omanufacturer,
+                      model         : omodel,
+                      platform      : oplatform,
+                      version       : oversion,
+                      dimension     : totalPoint.join(),
+                      dtime         : new Date,
+                      posx          : params['data'][0],
+                      posy          : params['data'][1],
+                      mac_address   : encodeURIComponent(mac_address),
+                      padding       : opadding.join(),
+                      position      : oposition[0] + "," + oposition[1],
+                      map_size      : mapSize.join(),
+                      x_acce        : x.x,
+                      y_acce        : x.y,
+                      z_acce        : x.z,
+                      surround      : omaya_networks
+                    },
+                    success: function(returnValue){
+                      updateResult = $.parseJSON(returnValue);
+                    }
 
-          }, 1000);
+                  });
 
+                  var timeInterval = window.setInterval(function(){
+
+                      timeOut += 1;
+
+                      if (typeof(updateResult) == "object" || timeOut > timeOutSec) {
+
+                        if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
+                          navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
+                        } else {
+                          navigator.notification.alert("We are unable to complete this request. Please try again.", null, "ERROR", "OK");
+                        }
+
+                        window.plugins.spinnerDialog.hide();
+                        clearInterval(timeInterval);
+                        checkLock = false;
+                      
+                      }
+
+                    }, 1000);
+
+
+                  }, function(x){
+                    navigator.notification.alert(x, null, "Accelerator Error", "OK");
+                  });
+
+
+                }, function(x){
+                    navigator.notification.alert(x, null, "Wifi General Error", "OK");
+                });
+
+
+              }, function(x){ 
+                navigator.notification.alert(x, null, "Wifi Scan Error", "OK");
+              });
+
+            }, 5000);
+          
         } else {
 
           navigator.notification.alert("You can only calibrate one position at a time.", null, "ERROR", "OK");
@@ -358,6 +433,41 @@
           
       });
 
+    }
+
+    function complete_calibration(){
+
+        $.ajax({
+            url: "http://" + omaya_server + "/calibration/capturing/"+token_code+"/",
+            method: "POST",
+            data:{
+                token         : token_code,
+                site          : calibrate_site,
+                status        : "complete"
+            },
+            success: function(x){
+
+                navigator.notification.alert("Calibration has been saved.", null, "SUCCESS", "OK");
+                location.href = "index.html";
+
+            },
+            error: function(x){
+
+                navigator.notification.alert("There is an error to saved your calibration. Please retry.", null, "ERROR", "OK");
+
+            }
+
+        });
+
+    }
+
+
+    function omayaNetworkList(x){
+      navigator.notification.alert(x, null, "ERROR", "OK");
+    }
+
+    function omayaNetworkFail(x){
+      navigator.notification.alert(x, null, "ERROR", "OK");
     }
 
 </script>

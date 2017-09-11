@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <title>Login</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta name="generator" content="SensationThemes">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/styles.css" rel="stylesheet" type="text/css">
@@ -15,10 +14,11 @@
 </head>
 <body>
   <section class="mobile-wrapper">
+    <div class="w-embed"></div>
     <div class="bg-gradient page-content" data-scroll="0" id="main-stack">
       <div class="body padding">
-        <div style="height: 300px; color: white; text-align: center;">
-          <img src="images/logo.png" /><br /><h4>CALIBRATION</h4>
+        <div style="text-align: center; padding-top: 50px;">
+          <img src="images/logo.png" style="width: 80%;" /><br><h5>CALIBRATION</h5>
         </div>
         <div class="bottom-section padding">
           <div class="w-form">
@@ -46,7 +46,7 @@
               <div class="separator-button"></div>
             </form>
 
-            <a class="link-upper" href="#"  onclick="forget_account();"><strong>Remove my credential from this device.</strong></a>
+            <a class="link-upper" href="#" style="color: #fff;"  onclick="forget_account();"><span>Remove my credential from this device.</strong></a>
 
           </div>
         </div>
@@ -90,6 +90,8 @@
       if (server   !== "")  $("#server").val(server);
       if (tenant   !== "")  $("#tenant").val(tenant);
 
+      $("#main-stack").css("height", $(document).height() + "px");
+
     }
 
 
@@ -121,7 +123,7 @@
 
             }  else {
 
-              navigator.notification.alert("Wrong credential. Please try again.", null, "ERROR", "OK");
+              navigator.notification.alert(result['message'], null, "ERROR", "OK");
 
             }
 
@@ -133,11 +135,7 @@
 
     function forget_account(){
 
-      localData.setItem("omaya-credential", "");
-      localData.setItem("omaya-server",     "");
-      localData.setItem("omaya-username",   "");
-      localData.setItem("omaya-password",   "");
-      localData.setItem("omaya-tenant",     "");
+      localData.clear();
 
       $("#username").val("");
       $("#password").val("");
