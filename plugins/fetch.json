@@ -184,5 +184,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.danishin.wifiwizard": {
+        "source": {
+            "type": "registry",
+            "id": "https://github.com/danishin/WifiWizard.git"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

@@ -448,10 +448,10 @@ a {
 /* [3. FORMS] */
 
 .logo-login {
-  height: 211px;
-  background-image: url('../images/logo.svg');
+  height: 311px;
+  background-image: url('../images/logo.png');
   background-position: 50% 50%;
-  background-size: 130px;
+  background-size: 260px;
   background-repeat: no-repeat;
 }
 

@@ -69,12 +69,17 @@
               <div class="separator-fields"></div>
             </div>
             <div>
-              <label class="label-form" for="">Number Point (Column,Row)</label>
+              <label class="label-form" for="">Number of Point (Column,Row)</label>
               <input class="input-form w-input" data-name="point" id="point" maxlength="256" name="point" type="text">
               <div class="separator-fields"></div>
             </div>
             <div>
-              <label class="label-form" for="">Padding</label>
+              <label class="label-form" for="">Point Size</label>
+              <input class="input-form w-input" data-name="pointsize" id="pointsize" maxlength="256" name="pointsize" type="text">
+              <div class="separator-fields"></div>
+            </div>
+            <div>
+              <label class="label-form" for="">Map Padding</label>
               <input class="input-form w-input" data-name="padding" id="padding" maxlength="256" name="padding" type="text">
               <div class="separator-fields"></div>
             </div>
@@ -126,16 +131,18 @@
     var timeOutSec      = localData.getItem("omaya-timeout");
     var opadding        = localData.getItem("omaya-padding");
     var oposition       = localData.getItem("omaya-position");
+    var map_point_size  = localData.getItem("omaya-mappoint");
     
     function onDeviceReady(){
 
       // dummy value
 
-      if (totalPoint  == null) totalPoint = "5,8";
-      if (mapSize     == null) mapSize     = "600,600";
-      if (timeOutSec  == null) timeOutSec  = 30;
-      if (opadding    == null) opadding    = "5,5,5,5";
-      if (oposition   == null) oposition   = "center,center";
+      if (totalPoint      == null) totalPoint       = "5,8";
+      if (mapSize         == null) mapSize          = "600,600";
+      if (timeOutSec      == null) timeOutSec       = 30;
+      if (opadding        == null) opadding         = "5,5,5,5";
+      if (oposition       == null) oposition        = "center,center";
+      if (map_point_size  == null) map_point_size   = "20";
       
 
       $("#point").val(totalPoint);
@@ -143,7 +150,8 @@
       $("#timeout").val(timeOutSec);
       $("#padding").val(opadding);
       $("#gposition").val(oposition);
-
+      $("#pointsize").val(map_point_size);
+      
     }
 
     $("form").submit(function(e){
@@ -155,18 +163,21 @@
         timeOutSec      = $("#timeout").val();
         opadding        = $("#padding").val();
         oposition       = $("#gposition").val();
+        map_point_size  = $("#pointsize").val();
 
-        if (totalPoint  == null) totalPoint = "5,8";
-        if (mapSize     == null) mapSize    = "600,600";
-        if (timeOutSec  == null) timeOutSec = 30;
-        if (opadding    == null) opadding   = "5,5,5,5";
-        if (oposition   == null) oposition  = "center,center";
+        if (totalPoint      == null) totalPoint       = "5,8";
+        if (mapSize         == null) mapSize          = "600,600";
+        if (timeOutSec      == null) timeOutSec       = 30;
+        if (opadding        == null) opadding         = "5,5,5,5";
+        if (oposition       == null) oposition        = "center,center";
+        if (map_point_size  == null) map_point_size   = "20";
 
         localData.setItem("omaya-total"   , totalPoint);
         localData.setItem("omaya-mapsize" , mapSize);
         localData.setItem("omaya-timeout" , timeOutSec);
         localData.setItem("omaya-padding" , opadding);
         localData.setItem("omaya-position", oposition);
+        localData.setItem("omaya-mappoint", map_point_size);
 
         navigator.notification.alert("Update successful. You need to redo the calibration.", null, "SUCCESS", "OK");
 

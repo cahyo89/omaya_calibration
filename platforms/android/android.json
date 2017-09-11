@@ -95,6 +95,10 @@
                         {
                             "xml": "<feature name=\"MacAddressPlugin\"><param name=\"android-package\" value=\"com.badrit.MacAddress.MacAddressPlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WifiWizard\"><param name=\"android-package\" value=\"com.danishin.wifiwizard.WifiWizard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -154,6 +158,18 @@
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
                             "count": 1
                         }
                     ]
@@ -229,6 +245,9 @@
             "PACKAGE_NAME": "com.synchroweb.omaya"
         },
         "com-badrit-macaddress": {
+            "PACKAGE_NAME": "com.synchroweb.omaya"
+        },
+        "com.danishin.wifiwizard": {
             "PACKAGE_NAME": "com.synchroweb.omaya"
         }
     },
@@ -767,6 +786,14 @@
             "clobbers": [
                 "window.MacAddress"
             ]
+        },
+        {
+            "id": "com.danishin.wifiwizard.WifiWizard",
+            "file": "plugins/com.danishin.wifiwizard/www/WifiWizard.js",
+            "pluginId": "com.danishin.wifiwizard",
+            "clobbers": [
+                "window.WifiWizard"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -792,6 +819,7 @@
         "cordova-plugin-vibration": "2.1.5",
         "cordova-plugin-whitelist": "1.2.2",
         "cordova-plugin-spinner-dialog": "1.3.1",
-        "com-badrit-macaddress": "0.2.1"
+        "com-badrit-macaddress": "0.2.1",
+        "com.danishin.wifiwizard": "0.2.11"
     }
 }

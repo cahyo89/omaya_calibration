@@ -97,6 +97,8 @@
   <script src="js/webflow.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/echarts.min.js"></script>
+
+
   <script>
 
     var checkLock       = false;
@@ -115,12 +117,15 @@
     var timeOutSec      = localData.getItem("omaya-timeout");
     var opadding        = localData.getItem("omaya-padding");
     var oposition       = localData.getItem("omaya-position");
+    var map_point_size  = localData.getItem("omaya-mappoint");
 
     // current device information
     var omanufacturer   = "";
     var omodel          = "";
     var oplatform       = "";
     var oversion        = "";
+
+    var omaya_networks  = [];
     
     document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -156,6 +161,7 @@
         }
 
       });
+      
     }
 
     function reset_cal(){
@@ -197,11 +203,13 @@
 
       // ///////////////////////////////////////////////////////////////////////////////
 
-      if (totalPoint == null) totalPoint    = "5,8";
-      if (mapSize    == null) mapSize       = "600,600";
-      if (timeOutSec == null) timeOutSec    = 30;
-      if (opadding   == null) opadding      = "0,0,0,0";
-      if (oposition  == null) oposition     = "center,center";
+      if (totalPoint      == null) totalPoint         = "5,8";
+      if (mapSize         == null) mapSize            = "600,600";
+      if (timeOutSec      == null) timeOutSec         = 10;
+      if (opadding        == null) opadding           = "5,5,5,5";
+      if (oposition       == null) oposition          = "center,center";
+      if (map_point_size  == null) map_point_size     = "20";
+      
 
 
       totalPoint  = totalPoint.split(",");
@@ -292,7 +300,7 @@
               name: 'Position',
               data: data,
               type: 'scatter',
-              symbolSize: 10,
+              symbolSize: map_point_size,
               label: {
                   emphasis: {
                       show: true,
@@ -335,57 +343,94 @@
           var ratiox=mapSize[0]/totalPoint[0];
           var ratioy=mapSize[1]/totalPoint[1];
           var ydata=(totalPoint[1]-params['data'][1])-1;
-     
-          window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
           var timestamp=new Date;
           var updateResult='';
-          timeOut=0;
-          var timeInterval = window.setInterval(function(){
 
-            timeOut += 1;
+          window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
+          // var timeInterval = window.setInterval(function(){
+          WifiWizard.startScan(function(x){ 
 
-            // if (typeof(updateResult) == "object" && timeOut > timeOutSec) {
-            if (timeOut > timeOutSec) {
-               $.ajax({
-                url: "http://" + omaya_server + "/calibration/capturing/"+token_code+"/",
-                method: "POST",
-                data:{
-                  token         : token_code,
-                  site          : calibrate_site,
-                  manufacturer  : omanufacturer,
-                  model         : omodel,
-                  platform      : oplatform,
-                  version       : oversion,
-                  dimension     : totalPoint.join(),
-                  dtime         : timestamp,
-                  posx          : params['data'][0],
-                  posy          : params['data'][1],
-                  picx          : (params['data'][0]*ratiox),
-                  picy          : (ydata*ratioy),
-                  mac_address   : encodeURIComponent(mac_address),
-                  padding       : opadding.join(),
-                  position      : oposition[0] + "," + oposition[1],
-                  map_size      : mapSize.join()
-                },
-                success: function(returnValue){
-                  updateResult = $.parseJSON(returnValue);
-                   if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
-                    navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
-                  } else {
-                    // navigator.notification.alert("We are unable to complete this request. Please try again.", null, "ERROR", "OK");
-                    navigator.notification.alert(updateResult['message'], null, "ERROR", "OK");
-                  }
+            window.setTimeout(function(){
+
+              WifiWizard.getScanResults(function(z){
+
+                omaya_networks  = [];
+
+                for (var i = z.length - 1; i >= 0; i--) {
+                  omaya_networks.push({"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']});
                 }
+
+                omaya_networks = encodeURIComponent(btoa(JSON.stringify(omaya_networks)));
+
+                // navigator.accelerometer.getCurrentAcceleration(function(x){
+                  
+                  // var timeInterval = window.setInterval(function(){
+
+                      timeOut += 1;
+                      if (timeOut > timeOutSec) {
+                           $.ajax({
+                              url: "http://" + omaya_server + "/calibration/capturing/" + token_code + "/",
+                              method: "POST",
+                              data:{
+                                token         : token_code,
+                                site          : calibrate_site,
+                                manufacturer  : omanufacturer,
+                                model         : omodel,
+                                platform      : oplatform,
+                                version       : oversion,
+                                dimension     : totalPoint.join(),
+                                dtime         : timestamp,
+                                posx          : params['data'][0],
+                                posy          : params['data'][1],
+                                picx          : (params['data'][0]*ratiox),
+                                picy          : (ydata*ratioy),
+                                mac_address   : encodeURIComponent(mac_address),
+                                padding       : opadding.join(),
+                                position      : oposition[0] + "," + oposition[1],
+                                map_size      : mapSize.join(),
+                                // x_acce        : x.x,
+                                // y_acce        : x.y,
+                                // z_acce        : x.z,
+                                surround      : omaya_networks
+                              },
+                              success: function(returnValue){
+                                updateResult = $.parseJSON(returnValue);
+                              }
+
+                            });
+
+                        if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
+                          navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
+                        } else {
+                          navigator.notification.alert("We are unable to complete this request. Please try again.", null, "ERROR", "OK");
+                        }
+
+                        window.plugins.spinnerDialog.hide();
+                        clearInterval(timeInterval);
+                        checkLock = false;
+                      
+                      }
+
+                    // }, 1000);
+
+
+                  // }, function(x){
+                  //   navigator.notification.alert(x, null, "Accelerator Error", "OK");
+                  // });
+
+
+                }, function(x){
+                    navigator.notification.alert(x, null, "Wifi General Error", "OK");
+                });
+
+
+              }, function(x){ 
+                navigator.notification.alert(x, null, "Wifi Scan Error", "OK");
               });
 
-              window.plugins.spinnerDialog.hide();
-              clearInterval(timeInterval);
-              checkLock = false;
-            
-            }
-
-          }, 1000);
-
+            }, 5000);
+            // }, 1000);
+          
         } else {
 
           navigator.notification.alert("You can only calibrate one position at a time.", null, "ERROR", "OK");
@@ -420,6 +465,15 @@
 
         });
 
+    }
+
+
+    function omayaNetworkList(x){
+      navigator.notification.alert(x, null, "ERROR", "OK");
+    }
+
+    function omayaNetworkFail(x){
+      navigator.notification.alert(x, null, "ERROR", "OK");
     }
 
 </script>
