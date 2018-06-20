@@ -19,9 +19,6 @@
     "cordova-plugin-contacts": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
     "cordova-plugin-device-motion": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
@@ -35,9 +32,6 @@
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
-    "cordova-plugin-globalization": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "cordova-plugin-inappbrowser": {
@@ -58,9 +52,6 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
-    "cordova-plugin-vibration": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
@@ -72,14 +63,22 @@
     },
     "com.pylonproducts.wifiwizard": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
-    }
-  },
-  "dependent_plugins": {
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
+    },
     "cordova-plugin-compat": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     }
-  }
+  },
+  "dependent_plugins": {}
 }

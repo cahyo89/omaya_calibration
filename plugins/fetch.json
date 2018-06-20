@@ -26,17 +26,17 @@
   "cordova-plugin-file": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-file"
+      "id": "cordova-plugin-file@~4.1.1"
     },
-    "is_top_level": false,
+    "is_top_level": true,
     "variables": {}
   },
   "cordova-plugin-compat": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-compat"
+      "id": "cordova-plugin-compat@1.2.0"
     },
-    "is_top_level": false,
+    "is_top_level": true,
     "variables": {}
   },
   "cordova-plugin-console": {
@@ -51,14 +51,6 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-contacts@~2.0.1"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
-  "cordova-plugin-device": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-device@~1.1.1"
     },
     "is_top_level": true,
     "variables": {}
@@ -103,14 +95,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-globalization": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-globalization@~1.0.3"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-inappbrowser": {
     "source": {
       "type": "registry",
@@ -151,14 +135,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-vibration": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-vibration@~2.1.0"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-whitelist": {
     "source": {
       "type": "registry",
@@ -189,6 +165,30 @@
     "source": {
       "type": "registry",
       "id": "wifiwizard"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-vibration": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-vibration@~2.1.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-globalization": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-globalization@~1.0.3"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-device": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-device@~1.1.1"
     },
     "is_top_level": true,
     "variables": {}

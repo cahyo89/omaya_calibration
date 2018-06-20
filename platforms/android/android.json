@@ -21,10 +21,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Accelerometer\"><param name=\"android-package\" value=\"org.apache.cordova.devicemotion.AccelListener\" /></feature>",
               "count": 1
             },
@@ -53,10 +49,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
               "count": 1
             },
@@ -81,10 +73,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"Vibration\"><param name=\"android-package\" value=\"org.apache.cordova.vibration.Vibration\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
             },
@@ -98,6 +86,18 @@
             },
             {
               "xml": "<feature name=\"WifiWizard\"><param name=\"android-package\" value=\"com.pylonproducts.wifiwizard.WifiWizard\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Vibration\"><param name=\"android-package\" value=\"org.apache.cordova.vibration.Vibration\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
               "count": 1
             }
           ]
@@ -157,10 +157,6 @@
           ],
           "/manifest": [
             {
-              "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
-              "count": 1
-            },
-            {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
               "count": 1
             },
@@ -170,6 +166,10 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
               "count": 1
             }
           ]
@@ -193,9 +193,6 @@
     "cordova-plugin-contacts": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
     "cordova-plugin-device-motion": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
@@ -212,9 +209,6 @@
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
-    "cordova-plugin-globalization": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "cordova-plugin-inappbrowser": {
@@ -235,9 +229,6 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
-    "cordova-plugin-vibration": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
@@ -248,6 +239,15 @@
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "com.pylonproducts.wifiwizard": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
+    },
+    "cordova-plugin-device": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     }
   },
@@ -363,14 +363,6 @@
       "pluginId": "cordova-plugin-contacts",
       "merges": [
         ""
-      ]
-    },
-    {
-      "id": "cordova-plugin-device.device",
-      "file": "plugins/cordova-plugin-device/www/device.js",
-      "pluginId": "cordova-plugin-device",
-      "clobbers": [
-        "device"
       ]
     },
     {
@@ -633,22 +625,6 @@
       "runs": true
     },
     {
-      "id": "cordova-plugin-globalization.GlobalizationError",
-      "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
-      "pluginId": "cordova-plugin-globalization",
-      "clobbers": [
-        "window.GlobalizationError"
-      ]
-    },
-    {
-      "id": "cordova-plugin-globalization.globalization",
-      "file": "plugins/cordova-plugin-globalization/www/globalization.js",
-      "pluginId": "cordova-plugin-globalization",
-      "clobbers": [
-        "navigator.globalization"
-      ]
-    },
-    {
       "id": "cordova-plugin-inappbrowser.inappbrowser",
       "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
       "pluginId": "cordova-plugin-inappbrowser",
@@ -763,15 +739,6 @@
       ]
     },
     {
-      "id": "cordova-plugin-vibration.notification",
-      "file": "plugins/cordova-plugin-vibration/www/vibration.js",
-      "pluginId": "cordova-plugin-vibration",
-      "merges": [
-        "navigator.notification",
-        "navigator"
-      ]
-    },
-    {
       "id": "cordova-plugin-spinner-dialog.SpinnerDialog",
       "file": "plugins/cordova-plugin-spinner-dialog/www/spinner.js",
       "pluginId": "cordova-plugin-spinner-dialog",
@@ -794,6 +761,39 @@
       "clobbers": [
         "window.WifiWizard"
       ]
+    },
+    {
+      "id": "cordova-plugin-vibration.notification",
+      "file": "plugins/cordova-plugin-vibration/www/vibration.js",
+      "pluginId": "cordova-plugin-vibration",
+      "merges": [
+        "navigator.notification",
+        "navigator"
+      ]
+    },
+    {
+      "id": "cordova-plugin-globalization.GlobalizationError",
+      "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "window.GlobalizationError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-globalization.globalization",
+      "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "navigator.globalization"
+      ]
+    },
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -802,24 +802,24 @@
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-console": "1.0.7",
     "cordova-plugin-contacts": "2.0.1",
-    "cordova-plugin-device": "1.1.6",
     "cordova-plugin-device-motion": "1.2.5",
     "cordova-plugin-device-orientation": "1.0.7",
     "cordova-plugin-dialogs": "1.2.1",
     "cordova-plugin-file": "4.3.3",
     "cordova-plugin-file-transfer": "1.5.1",
     "cordova-plugin-geolocation": "2.1.0",
-    "cordova-plugin-globalization": "1.0.7",
     "cordova-plugin-inappbrowser": "1.3.0",
     "cordova-plugin-media": "2.2.0",
     "cordova-plugin-media-capture": "1.2.0",
     "cordova-plugin-network-information": "1.2.1",
     "cordova-plugin-splashscreen": "3.2.2",
     "cordova-plugin-statusbar": "2.1.3",
-    "cordova-plugin-vibration": "2.1.5",
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-spinner-dialog": "1.3.1",
     "com-badrit-macaddress": "0.2.1",
-    "com.pylonproducts.wifiwizard": "0.2.11"
+    "com.pylonproducts.wifiwizard": "0.2.11",
+    "cordova-plugin-vibration": "2.1.6",
+    "cordova-plugin-globalization": "1.0.9",
+    "cordova-plugin-device": "1.1.7"
   }
 }
