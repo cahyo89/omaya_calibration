@@ -69,6 +69,9 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
+    },
+    "com.pylonproducts.wifiwizard": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
     }
   },
   "dependent_plugins": {

@@ -9,14 +9,6 @@ module.exports = [
     ]
   },
   {
-    "id": "com.danishin.wifiwizard.WifiWizard",
-    "file": "plugins/com.danishin.wifiwizard/www/WifiWizard.js",
-    "pluginId": "com.danishin.wifiwizard",
-    "clobbers": [
-      "window.WifiWizard"
-    ]
-  },
-  {
     "id": "cordova-plugin-battery-status.battery",
     "file": "plugins/cordova-plugin-battery-status/www/battery.js",
     "pluginId": "cordova-plugin-battery-status",
@@ -541,13 +533,20 @@ module.exports = [
       "navigator.notification",
       "navigator"
     ]
+  },
+  {
+    "id": "com.pylonproducts.wifiwizard.WifiWizard",
+    "file": "plugins/com.pylonproducts.wifiwizard/www/WifiWizard.js",
+    "pluginId": "com.pylonproducts.wifiwizard",
+    "clobbers": [
+      "window.WifiWizard"
+    ]
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
   "com-badrit-macaddress": "0.2.1",
-  "com.danishin.wifiwizard": "0.2.11",
   "cordova-plugin-battery-status": "1.1.2",
   "cordova-plugin-camera": "2.1.1",
   "cordova-plugin-compat": "1.1.0",
@@ -569,7 +568,8 @@ module.exports.metadata =
   "cordova-plugin-splashscreen": "3.2.2",
   "cordova-plugin-statusbar": "2.1.3",
   "cordova-plugin-vibration": "2.1.5",
-  "cordova-plugin-whitelist": "1.2.2"
+  "cordova-plugin-whitelist": "1.2.2",
+  "com.pylonproducts.wifiwizard": "0.2.11"
 };
 // BOTTOM OF METADATA
 });

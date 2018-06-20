@@ -30,13 +30,14 @@
       "com-badrit-macaddress": {},
       "cordova-plugin-device-orientation": {},
       "cordova-plugin-device-motion": {},
-      "com.danishin.wifiwizard": {}
+      "com.danishin.wifiwizard": {},
+      "com.pylonproducts.wifiwizard": {}
     }
   },
   "dependencies": {
     "com-badrit-macaddress": "https://github.com/mohamed-salah/MacAddress.git",
     "com.danishin.wifiwizard": "https://github.com/danishin/WifiWizard.git",
-    "cordova-android": "~7.0.0",
+    "cordova-android": "^7.0.0",
     "cordova-plugin-battery-status": "~1.1.1",
     "cordova-plugin-camera": "~2.1.1",
     "cordova-plugin-console": "~1.0.2",
@@ -58,6 +59,7 @@
     "cordova-plugin-statusbar": "~2.1.2",
     "cordova-plugin-vibration": "~2.1.0",
     "cordova-plugin-whitelist": "~1.2.1",
-    "cordova-plugin-wifi-wizard-tecnosolve": "^0.2.13"
+    "cordova-plugin-wifi-wizard-tecnosolve": "^0.2.13",
+    "wifiwizard": "^0.2.11"
   }
 }
