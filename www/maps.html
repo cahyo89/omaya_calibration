@@ -196,28 +196,7 @@
 
     }
 
-    function win(e) { 
-        if(e) { 
-            alert("Wifi enabled already"); 
-        } 
-        else { 
-            WifiWizard.setWifiEnabled(true, winEnable, failEnable); 
-        } 
- 
-    } 
- 
-    function fail(e) { 
-        alert("Error checking Wifi status"); 
-    } 
- 
-    function winEnable(e) { 
-        alert("Wifi enabled successfully"); 
-    } 
- 
-    function failEnable(e) { 
-        alert("Error enabling Wifi "); 
-    } 
-
+  
     function create_map(map_path,map_size){
 
       mapSize = map_size;
@@ -378,9 +357,10 @@
 
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
           // var timeInterval = window.setInterval(function(){
+          window.setTimeout(function(){
           WifiWizard.startScan(function(x){ 
 
-            window.setTimeout(function(){
+            
 
               WifiWizard.getScanResults(function(z){
 
@@ -455,11 +435,11 @@
                 });
 
 
-              }, function(x){ 
-                navigator.notification.alert(x, null, "Wifi Scan Error", "OK");
-              });
+            });
 
-            }, 5000);
+            }, function(x){ 
+                navigator.notification.alert(x, null, "Wifi Scan Error", "OK");
+              }, 5000);
             // }, 1000);
           
         } else {
