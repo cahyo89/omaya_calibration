@@ -13,10 +13,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"WifiWizard\"><param name=\"android-package\" value=\"com.danishin.wifiwizard.WifiWizard\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Battery\"><param name=\"android-package\" value=\"org.apache.cordova.batterystatus.BatteryListener\" /></feature>",
               "count": 1
             },
@@ -157,18 +153,6 @@
           ],
           "/manifest": [
             {
-              "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
-              "count": 1
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\" />",
-              "count": 1
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
-              "count": 1
-            },
-            {
               "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
               "count": 1
             }
@@ -179,9 +163,6 @@
   },
   "installed_plugins": {
     "com-badrit-macaddress": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
-    "com.danishin.wifiwizard": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "cordova-plugin-battery-status": {
@@ -259,14 +240,6 @@
       "pluginId": "com-badrit-macaddress",
       "clobbers": [
         "window.MacAddress"
-      ]
-    },
-    {
-      "id": "com.danishin.wifiwizard.WifiWizard",
-      "file": "plugins/com.danishin.wifiwizard/www/WifiWizard.js",
-      "pluginId": "com.danishin.wifiwizard",
-      "clobbers": [
-        "window.WifiWizard"
       ]
     },
     {
@@ -798,7 +771,6 @@
   ],
   "plugin_metadata": {
     "com-badrit-macaddress": "0.2.1",
-    "com.danishin.wifiwizard": "0.2.11",
     "cordova-plugin-battery-status": "1.1.2",
     "cordova-plugin-camera": "2.1.1",
     "cordova-plugin-compat": "1.1.0",

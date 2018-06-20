@@ -25,9 +25,6 @@
     "com-badrit-macaddress": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
-    "com.danishin.wifiwizard": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
     "cordova-plugin-battery-status": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
@@ -103,14 +100,6 @@
       "pluginId": "com-badrit-macaddress",
       "clobbers": [
         "window.MacAddress"
-      ]
-    },
-    {
-      "file": "plugins/com.danishin.wifiwizard/www/WifiWizard.js",
-      "id": "com.danishin.wifiwizard.WifiWizard",
-      "pluginId": "com.danishin.wifiwizard",
-      "clobbers": [
-        "window.WifiWizard"
       ]
     },
     {
@@ -727,7 +716,6 @@
   ],
   "plugin_metadata": {
     "com-badrit-macaddress": "0.2.1",
-    "com.danishin.wifiwizard": "0.2.11",
     "cordova-plugin-battery-status": "1.1.2",
     "cordova-plugin-camera": "2.1.1",
     "cordova-plugin-compat": "1.1.0",

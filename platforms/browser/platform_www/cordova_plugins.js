@@ -9,14 +9,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.danishin.wifiwizard/www/WifiWizard.js",
-        "id": "com.danishin.wifiwizard.WifiWizard",
-        "pluginId": "com.danishin.wifiwizard",
-        "clobbers": [
-            "window.WifiWizard"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-battery-status/www/battery.js",
         "id": "cordova-plugin-battery-status.battery",
         "pluginId": "cordova-plugin-battery-status",
@@ -632,7 +624,6 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "com-badrit-macaddress": "0.2.1",
-    "com.danishin.wifiwizard": "0.2.11",
     "cordova-plugin-battery-status": "1.1.2",
     "cordova-plugin-camera": "2.1.1",
     "cordova-plugin-compat": "1.1.0",

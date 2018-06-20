@@ -10,9 +10,6 @@
     "com-badrit-macaddress": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
-    "com.danishin.wifiwizard": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
     "cordova-plugin-battery-status": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
