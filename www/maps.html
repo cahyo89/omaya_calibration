@@ -205,7 +205,7 @@
 
       if (totalPoint      == null) totalPoint         = "5,8";
       if (mapSize         == null) mapSize            = "600,600";
-      if (timeOutSec      == null) timeOutSec         = 20;
+      if (timeOutSec      == null) timeOutSec         = 10;
       if (opadding        == null) opadding           = "5,5,5,5";
       if (oposition       == null) oposition          = "center,center";
       if (map_point_size  == null) map_point_size     = "20";
@@ -337,7 +337,7 @@
         if (checkLock == false) {
 
           checkLock = true;
-
+          var omaya_networks  = [];
           var timeOut = 0;
           var updateResult = "";
           var ratiox=mapSize[0]/totalPoint[0];
@@ -354,8 +354,8 @@
 
               WifiWizard.getScanResults(function(z){
 
-                omaya_networks  = [];
-
+               
+        
                 for (var i = z.length - 1; i >= 0; i--) {
                   omaya_networks.push({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']});
                 }
