@@ -201,7 +201,7 @@
             alert("Wifi enabled already"); 
         } 
         else { 
-            WifiWizard.setWifiEnabled(true, winEnable, failEnable); 
+            WifiWizard2.setWifiEnabled(true, winEnable, failEnable); 
         } 
  
     } 
@@ -353,15 +353,15 @@
 
       floorPlan.setOption(option);
 
-      /* floorPlan.on('click', function (params) { 
+       floorPlan.on('click', function (params) { 
           try {                
-                WifiWizard.isWifiEnabled(win, fail); 
+                WifiWizard2.isWifiEnabled(win, fail); 
             } 
             catch(err) { 
                 alert("Plugin Error - " + err.message); 
             } 
-      }); */
-      floorPlan.on('click', function (params) {
+      }); 
+      /*floorPlan.on('click', function (params) {
 
         if (checkLock == false) {
 
@@ -467,7 +467,7 @@
 
         }
           
-      });
+      });*/
 
     }
 

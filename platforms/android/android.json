@@ -95,10 +95,6 @@
             {
               "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
               "count": 1
-            },
-            {
-              "xml": "<feature name=\"WifiWizard2\"><param name=\"android-package\" value=\"wifiwizard2.WifiWizard2\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
             }
           ]
         }
@@ -128,7 +124,7 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
-              "count": 3
+              "count": 2
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
@@ -148,22 +144,10 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-              "count": 2
+              "count": 1
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
-              "count": 2
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\" />",
-              "count": 1
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\" />",
-              "count": 1
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
               "count": 1
             }
           ],
@@ -245,12 +229,6 @@
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
-    "es6-promise-plugin": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
-    "wifiwizard2": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     }
   },
@@ -789,20 +767,6 @@
       "clobbers": [
         "device"
       ]
-    },
-    {
-      "id": "es6-promise-plugin.Promise",
-      "file": "plugins/es6-promise-plugin/www/promise.js",
-      "pluginId": "es6-promise-plugin",
-      "runs": true
-    },
-    {
-      "id": "wifiwizard2.WifiWizard2",
-      "file": "plugins/wifiwizard2/www/WifiWizard2.js",
-      "pluginId": "wifiwizard2",
-      "clobbers": [
-        "window.WifiWizard2"
-      ]
     }
   ],
   "plugin_metadata": {
@@ -828,8 +792,6 @@
     "com-badrit-macaddress": "0.2.1",
     "cordova-plugin-vibration": "2.1.6",
     "cordova-plugin-globalization": "1.0.9",
-    "cordova-plugin-device": "1.1.7",
-    "es6-promise-plugin": "4.1.0",
-    "wifiwizard2": "3.0.0"
+    "cordova-plugin-device": "1.1.7"
   }
 }

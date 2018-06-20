@@ -533,20 +533,6 @@ module.exports = [
         "clobbers": [
             "device"
         ]
-    },
-    {
-        "id": "es6-promise-plugin.Promise",
-        "file": "plugins/es6-promise-plugin/www/promise.js",
-        "pluginId": "es6-promise-plugin",
-        "runs": true
-    },
-    {
-        "id": "wifiwizard2.WifiWizard2",
-        "file": "plugins/wifiwizard2/www/WifiWizard2.js",
-        "pluginId": "wifiwizard2",
-        "clobbers": [
-            "window.WifiWizard2"
-        ]
     }
 ];
 module.exports.metadata = 
@@ -574,9 +560,7 @@ module.exports.metadata =
     "com-badrit-macaddress": "0.2.1",
     "cordova-plugin-vibration": "2.1.6",
     "cordova-plugin-globalization": "1.0.9",
-    "cordova-plugin-device": "1.1.7",
-    "es6-promise-plugin": "4.1.0",
-    "wifiwizard2": "3.0.0"
+    "cordova-plugin-device": "1.1.7"
 };
 // BOTTOM OF METADATA
 });

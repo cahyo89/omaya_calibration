@@ -49,5 +49,5 @@
     <plugin name="cordova-plugin-device" spec="~1.1.7" />
     <plugin name="cordova-plugin-compat" spec="~1.1.0" />
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
-    <plugin name="wifiwizard2" spec="~3.0.0" />
+    <plugin name="WifiWizard" spec="https://github.com/parsonsmatt/WifiWizard.git" />
 </widget>
