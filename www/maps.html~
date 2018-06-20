@@ -50,7 +50,7 @@
             </a>
 
             <a class="last nav-menu-link w-clearfix w-inline-block" data-load="1" href="#" onclick="reset_cal();">
-              <div class="icon-list-menure-scan with interval (5)">
+              <div class="icon-list-menu">
                 <div class="icon ion-ios-bookmarks-outline"></div>
               </div>
               <div class="nav-menu-titles">Reset Calibration</div>
@@ -364,7 +364,7 @@
 console.log("timeOut : "+timeOut);          
 console.log("Result : "+JSON.stringify(x));                                                                                                                               
 
-              WifiWizard.getScanResults(function(z){
+              WifiWizard.getScanResults(false,function(z){
 console.log("Result : "+JSON.stringify(z));
                 for (var i = z.length - 1; i >= 0; i--) {
                   omaya_networks.push({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']});
