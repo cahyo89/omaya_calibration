@@ -358,8 +358,8 @@
 
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
           // var timeInterval = window.setInterval(function(){
-          window.setTimeout(function(){
-         incs += 1;
+         var timeInterval= window.setInterval(function(){
+             timeOut += 2;
           WifiWizard.startScan(function(x){ 
 console.log("Scan : "+incs);                                                                                                                                         
 
@@ -367,14 +367,14 @@ console.log("Scan : "+incs);
 
                 for (var i = z.length - 1; i >= 0; i--) {
                   omaya_networks.push({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']});
-console.log("Result : "+encodeURIComponent(btoa(JSON.stringify(z))));
+console.log("Result : "+JSON.stringify(z));
                 }
 
                 omaya_networks = encodeURIComponent(btoa(JSON.stringify(omaya_networks)));
 
                 // navigator.accelerometer.getCurrentAcceleration(function(x){
                   
-                  var timeInterval = window.setInterval(function(){
+                 
 
                       timeOut += 1;
                       if (timeOut > timeOutSec) {
@@ -422,7 +422,6 @@ console.log("Result : "+encodeURIComponent(btoa(JSON.stringify(z))));
                       
                       }
 
-                    }, 1000);
 
 
                   // }, function(x){
@@ -436,7 +435,7 @@ console.log("Result : "+encodeURIComponent(btoa(JSON.stringify(z))));
 
 
             });
-            },  5000);
+            },  2000);
             /*}, function(x){ 
                 navigator.notification.alert(x, null, "Wifi Scan Error", "OK");
               }, 5000);*/
