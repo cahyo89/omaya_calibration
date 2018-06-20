@@ -205,7 +205,7 @@
 
       if (totalPoint      == null) totalPoint         = "5,8";
       if (mapSize         == null) mapSize            = "600,600";
-      if (timeOutSec      == null) timeOutSec         = 30;
+      if (timeOutSec      == null) timeOutSec         = 10;
       if (opadding        == null) opadding           = "5,5,5,5";
       if (oposition       == null) oposition          = "center,center";
       if (map_point_size  == null) map_point_size     = "20";
@@ -340,9 +340,14 @@
 
           var timeOut = 0;
           var updateResult = "";
+          var ratiox=mapSize[0]/totalPoint[0];
+          var ratioy=mapSize[1]/totalPoint[1];
+          var ydata=(totalPoint[1]-params['data'][1])-1;
+          var timestamp=new Date;
+          var updateResult='';
 
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
-
+          // var timeInterval = window.setInterval(function(){
           WifiWizard.startScan(function(x){ 
 
             window.setTimeout(function(){
@@ -352,53 +357,54 @@
                 omaya_networks  = [];
 
                 for (var i = z.length - 1; i >= 0; i--) {
-                  omaya_networks.push({"SSID": z[i]['SSID'], "RSSI": z[i]['level']});
+                  omaya_networks.push({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']});
                 }
 
                 omaya_networks = encodeURIComponent(btoa(JSON.stringify(omaya_networks)));
 
-                navigator.accelerometer.getCurrentAcceleration(function(x){
+                // navigator.accelerometer.getCurrentAcceleration(function(x){
                   
-                  $.ajax({
-                    url: "http://" + omaya_server + "/calibration/capturing/" + token_code + "/",
-                    method: "POST",
-                    data:{
-                      token         : token_code,
-                      site          : calibrate_site,
-                      manufacturer  : omanufacturer,
-                      model         : omodel,
-                      platform      : oplatform,
-                      version       : oversion,
-                      dimension     : totalPoint.join(),
-                      dtime         : new Date,
-                      posx          : params['data'][0],
-                      posy          : params['data'][1],
-                      mac_address   : encodeURIComponent(mac_address),
-                      padding       : opadding.join(),
-                      position      : oposition[0] + "," + oposition[1],
-                      map_size      : mapSize.join(),
-                      x_acce        : x.x,
-                      y_acce        : x.y,
-                      z_acce        : x.z,
-                      surround      : omaya_networks
-                    },
-                    success: function(returnValue){
-                      updateResult = $.parseJSON(returnValue);
-                    }
-
-                  });
-
                   var timeInterval = window.setInterval(function(){
 
                       timeOut += 1;
+                      if (timeOut > timeOutSec) {
+                           $.ajax({
+                              url: "http://" + omaya_server + "/calibration/capturing/" + token_code + "/",
+                              method: "POST",
+                              data:{
+                                token         : token_code,
+                                site          : calibrate_site,
+                                manufacturer  : omanufacturer,
+                                model         : omodel,
+                                platform      : oplatform,
+                                version       : oversion,
+                                dimension     : totalPoint.join(),
+                                dtime         : timestamp,
+                                posx          : params['data'][0],
+                                posy          : params['data'][1],
+                                picx          : (params['data'][0]*ratiox),
+                                picy          : (ydata*ratioy),
+                                mac_address   : encodeURIComponent(mac_address),
+                                padding       : opadding.join(),
+                                position      : oposition[0] + "," + oposition[1],
+                                map_size      : mapSize.join(),
+                                // x_acce        : x.x,
+                                // y_acce        : x.y,
+                                // z_acce        : x.z,
+                                surround      : omaya_networks
+                              },
+                              success: function(returnValue){
+                                updateResult = $.parseJSON(returnValue);
 
-                      if (typeof(updateResult) == "object" || timeOut > timeOutSec) {
+                                if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
+                                  navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
+                                } else {
+                                  navigator.notification.alert(updateResult['message'], null, "ERROR", "OK");
+                                }
+                              }
 
-                        if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
-                          navigator.notification.alert("Please move to the next position.", null, "SUCCESS", "OK");
-                        } else {
-                          navigator.notification.alert("We are unable to complete this request. Please try again.", null, "ERROR", "OK");
-                        }
+                            });
+
 
                         window.plugins.spinnerDialog.hide();
                         clearInterval(timeInterval);
@@ -409,9 +415,9 @@
                     }, 1000);
 
 
-                  }, function(x){
-                    navigator.notification.alert(x, null, "Accelerator Error", "OK");
-                  });
+                  // }, function(x){
+                  //   navigator.notification.alert(x, null, "Accelerator Error", "OK");
+                  // });
 
 
                 }, function(x){
@@ -424,6 +430,7 @@
               });
 
             }, 5000);
+            // }, 1000);
           
         } else {
 

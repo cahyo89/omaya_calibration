@@ -535,9 +535,9 @@ module.exports = [
         ]
     },
     {
-        "id": "com.danishin.wifiwizard.WifiWizard",
-        "file": "plugins/com.danishin.wifiwizard/www/WifiWizard.js",
-        "pluginId": "com.danishin.wifiwizard",
+        "id": "com.pylonproducts.wifiwizard.WifiWizard",
+        "file": "plugins/com.pylonproducts.wifiwizard/www/WifiWizard.js",
+        "pluginId": "com.pylonproducts.wifiwizard",
         "clobbers": [
             "window.WifiWizard"
         ]
@@ -569,7 +569,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-spinner-dialog": "1.3.1",
     "com-badrit-macaddress": "0.2.1",
-    "com.danishin.wifiwizard": "0.2.11"
+    "com.pylonproducts.wifiwizard": "0.2.11"
 };
 // BOTTOM OF METADATA
 });

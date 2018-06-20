@@ -69,7 +69,7 @@
         <param name="android-package" value="com.badrit.MacAddress.MacAddressPlugin" />
     </feature>
     <feature name="WifiWizard">
-        <param name="android-package" value="com.danishin.wifiwizard.WifiWizard" />
+        <param name="android-package" value="com.pylonproducts.wifiwizard.WifiWizard" />
         <param name="onload" value="true" />
     </feature>
     <name>Omaya Calibration</name>
