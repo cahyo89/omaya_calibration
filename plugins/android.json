@@ -7,9 +7,6 @@
     "files": {}
   },
   "installed_plugins": {
-    "com-badrit-macaddress": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
     "cordova-plugin-battery-status": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
@@ -68,9 +65,6 @@
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
-    "com.pylonproducts.wifiwizard": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     }
   },

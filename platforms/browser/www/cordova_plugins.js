@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/com-badrit-macaddress/www/MacAddress.js",
-        "id": "com-badrit-macaddress.MacAddress",
-        "pluginId": "com-badrit-macaddress",
-        "clobbers": [
-            "window.MacAddress"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-battery-status/www/battery.js",
         "id": "cordova-plugin-battery-status.battery",
         "pluginId": "cordova-plugin-battery-status",
@@ -618,24 +610,14 @@ module.exports = [
             "navigator.notification",
             "navigator"
         ]
-    },
-    {
-        "file": "plugins/com.pylonproducts.wifiwizard/www/WifiWizard.js",
-        "id": "com.pylonproducts.wifiwizard.WifiWizard",
-        "pluginId": "com.pylonproducts.wifiwizard",
-        "clobbers": [
-            "window.WifiWizard"
-        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "com-badrit-macaddress": "0.2.1",
     "cordova-plugin-battery-status": "1.1.2",
     "cordova-plugin-camera": "2.1.1",
     "cordova-plugin-compat": "1.1.0",
-    "cordova-plugin-console": "1.0.7",
     "cordova-plugin-contacts": "2.0.1",
     "cordova-plugin-device": "1.1.6",
     "cordova-plugin-device-motion": "1.2.5",
@@ -654,7 +636,7 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.1.3",
     "cordova-plugin-vibration": "2.1.5",
     "cordova-plugin-whitelist": "1.2.2",
-    "com.pylonproducts.wifiwizard": "0.2.11"
+    "cordova-plugin-console": "1.0.7"
 }
 // BOTTOM OF METADATA
 });

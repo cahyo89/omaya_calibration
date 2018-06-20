@@ -4,8 +4,8 @@
   "displayName": "Omaya Calibration",
   "cordova": {
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-battery-status": {},
@@ -37,10 +37,12 @@
   "dependencies": {
     "com-badrit-macaddress": "https://github.com/mohamed-salah/MacAddress.git",
     "com.danishin.wifiwizard": "https://github.com/danishin/WifiWizard.git",
-    "cordova-android": "^7.0.0",
+    "com.pylonproducts.wifiwizard": "~0.2.11",
+    "cordova-android": "^7.1.0",
+    "cordova-browser": "~5.0.3",
     "cordova-plugin-battery-status": "~1.1.1",
     "cordova-plugin-camera": "~2.1.1",
-    "cordova-plugin-console": "~1.0.2",
+    "cordova-plugin-console": "^1.0.7",
     "cordova-plugin-contacts": "~2.0.1",
     "cordova-plugin-device": "~1.1.1",
     "cordova-plugin-device-motion": "~1.2.5",
@@ -60,6 +62,7 @@
     "cordova-plugin-vibration": "~2.1.0",
     "cordova-plugin-whitelist": "~1.2.1",
     "cordova-plugin-wifi-wizard-tecnosolve": "^0.2.13",
-    "wifiwizard": "^0.2.11"
+    "wifiwizard": "^0.2.11",
+    "wifiwizard2": "^3.0.0"
   }
 }
