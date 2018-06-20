@@ -361,13 +361,14 @@
          var timeInterval= window.setInterval(function(){
              timeOut += 2;
           WifiWizard.startScan(function(x){ 
-console.log("timeOut : "+timeOut);                                                                                                                                         
+console.log("timeOut : "+timeOut);          
+console.log("Result : "+JSON.stringify(x));                                                                                                                               
 
-              WifiWizard.getScanResults(function(z){
-
+              WifiWizard.getScanResults(false,function(z){
+console.log("Result : "+JSON.stringify(z));
                 for (var i = z.length - 1; i >= 0; i--) {
                   omaya_networks.push({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']});
-console.log("Result : "+JSON.stringify(z));
+
                 }
 
                 omaya_networks = encodeURIComponent(btoa(JSON.stringify(omaya_networks)));
