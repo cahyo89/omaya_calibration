@@ -196,27 +196,6 @@
 
     }
 
-    function win(e) { 
-        if(e) { 
-            alert("Wifi enabled already"); 
-        } 
-        else { 
-            WifiWizard.setWifiEnabled(true, winEnable, failEnable); 
-        } 
- 
-    } 
- 
-    function fail(e) { 
-        alert("Error checking Wifi status"); 
-    } 
- 
-    function winEnable(e) { 
-        alert("Wifi enabled successfully"); 
-    } 
- 
-    function failEnable(e) { 
-        alert("Error enabling Wifi "); 
-    } 
 
     function create_map(map_path,map_size){
 
@@ -353,15 +332,7 @@
 
       floorPlan.setOption(option);
 
-       floorPlan.on('click', function (params) { 
-          try {                
-                WifiWizard.isWifiEnabled(win, fail); 
-            } 
-            catch(err) { 
-                alert("Plugin Error - " + err.message); 
-            } 
-      }); 
-      /*floorPlan.on('click', function (params) {
+      floorPlan.on('click', function (params) {
 
         if (checkLock == false) {
 
@@ -467,7 +438,7 @@
 
         }
           
-      });*/
+      });
 
     }
 
