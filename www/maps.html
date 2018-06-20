@@ -348,6 +348,7 @@
           checkLock = true;
 
           var timeOut = 0;
+          var incs = 0;
           var updateResult = "";
           var ratiox=mapSize[0]/totalPoint[0];
           var ratioy=mapSize[1]/totalPoint[1];
@@ -358,14 +359,15 @@
           window.plugins.spinnerDialog.show(null, "Please wait. We are capturing your position.", true);
           // var timeInterval = window.setInterval(function(){
           window.setTimeout(function(){
+         incs += 1;
           WifiWizard.startScan(function(x){ 
-
-            
+console.log("Scan : "+incs);                                                                                                                                         
 
               WifiWizard.getScanResults(function(z){
 
                 for (var i = z.length - 1; i >= 0; i--) {
                   omaya_networks.push({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']});
+console.log("Result : "+encodeURIComponent(btoa(JSON.stringify(z))));
                 }
 
                 omaya_networks = encodeURIComponent(btoa(JSON.stringify(omaya_networks)));
