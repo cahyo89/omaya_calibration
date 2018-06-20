@@ -61,9 +61,6 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
-    "com.pylonproducts.wifiwizard": {
-      "PACKAGE_NAME": "com.synchroweb.omaya"
-    },
     "cordova-plugin-vibration": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
     },
@@ -78,7 +75,14 @@
     },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.synchroweb.omaya"
+    },
+    "wifiwizard2": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.synchroweb.omaya"
+    }
+  }
 }

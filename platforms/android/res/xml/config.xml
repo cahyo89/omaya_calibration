@@ -59,10 +59,6 @@
     <feature name="MacAddressPlugin">
         <param name="android-package" value="com.badrit.MacAddress.MacAddressPlugin" />
     </feature>
-    <feature name="WifiWizard">
-        <param name="android-package" value="com.pylonproducts.wifiwizard.WifiWizard" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="Vibration">
         <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
     </feature>
@@ -71,6 +67,10 @@
     </feature>
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="WifiWizard2">
+        <param name="android-package" value="wifiwizard2.WifiWizard2" />
+        <param name="onload" value="true" />
     </feature>
     <name>Omaya Calibration</name>
     <description>

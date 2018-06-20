@@ -201,7 +201,7 @@
             alert("Wifi enabled already"); 
         } 
         else { 
-            WifiWizard.setWifiEnabled(true, winEnable, failEnable); 
+            wifiwizard2.WifiWizard2.setWifiEnabled(true, winEnable, failEnable); 
         } 
  
     } 
@@ -355,7 +355,7 @@
 
        floorPlan.on('click', function (params) { 
           try {                
-                WifiWizard.isWifiEnabled(win, fail); 
+                wifiwizard2.WifiWizard2.isWifiEnabled(win, fail); 
             } 
             catch(err) { 
                 alert("Plugin Error - " + err.message); 

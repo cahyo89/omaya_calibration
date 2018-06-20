@@ -16,18 +16,14 @@
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
     <plugin name="cordova-plugin-contacts" source="npm" spec="~2.0.1" />
-    <plugin name="cordova-plugin-device" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
-    <plugin name="cordova-plugin-file" source="npm" spec="~4.1.1" />
     <plugin name="cordova-plugin-file-transfer" source="npm" spec="~1.5.0" />
     <plugin name="cordova-plugin-geolocation" source="npm" spec="~2.1.0" />
-    <plugin name="cordova-plugin-globalization" source="npm" spec="~1.0.3" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" spec="~1.3.0" />
     <plugin name="cordova-plugin-media" source="npm" spec="~2.2.0" />
     <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1" />
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
-    <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -48,5 +44,10 @@
     <plugin name="cordova-plugin-device-orientation" spec="~1.0.7" />
     <plugin name="cordova-plugin-device-motion" spec="~1.2.5" />
     <engine name="browser" spec="~5.0.3" />
-    <plugin name="com.pylonproducts.wifiwizard" spec="~0.2.11" />
+    <plugin name="cordova-plugin-vibration" spec="~2.1.6" />
+    <plugin name="cordova-plugin-globalization" spec="~1.0.9" />
+    <plugin name="cordova-plugin-device" spec="~1.1.7" />
+    <plugin name="cordova-plugin-compat" spec="~1.1.0" />
+    <plugin name="cordova-plugin-file" spec="~4.3.3" />
+    <plugin name="wifiwizard2" spec="~3.0.0" />
 </widget>
