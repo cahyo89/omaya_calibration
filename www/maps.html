@@ -361,7 +361,7 @@
          var timeInterval= window.setInterval(function(){
              timeOut += 2;
           WifiWizard.startScan(function(x){ 
-console.log("Scan : "+incs);                                                                                                                                         
+console.log("timeOut : "+timeOut);                                                                                                                                         
 
               WifiWizard.getScanResults(function(z){
 
@@ -374,9 +374,6 @@ console.log("Result : "+JSON.stringify(z));
 
                 // navigator.accelerometer.getCurrentAcceleration(function(x){
                   
-                 
-
-                      timeOut += 1;
                       if (timeOut > timeOutSec) {
                            $.ajax({
                               url: "http://" + omaya_server + "/calibration/capturing/" + token_code + "/",
@@ -434,7 +431,9 @@ console.log("Result : "+JSON.stringify(z));
                 });
 
 
-            });
+            }, function(x){ 
+                navigator.notification.alert(x, null, "Wifi Scan Error", "OK");
+              });
             },  2000);
             /*}, function(x){ 
                 navigator.notification.alert(x, null, "Wifi Scan Error", "OK");
