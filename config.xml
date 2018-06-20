@@ -5,7 +5,7 @@
         Calibration tool for Omaya System
     </description>
     <author email="support@synchroweb.com" href="http://synchroweb.com">
-        Nurhakim Samah
+        Cahyo Tri Satrio
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
@@ -50,5 +50,6 @@
     <plugin name="com.danishin.wifiwizard" spec="https://github.com/danishin/WifiWizard.git" />
     <engine name="android" spec="~7.0.0" />
     <engine name="browser" spec="~5.0.3" />
-    <plugin name="com.pylonproducts.wifiwizard" spec="~0.2.11" />
+    <!--plugin name="com.pylonproducts.wifiwizard" spec="~0.2.11" /-->
+    <gap:plugin name="com.pylonproducts.wifiwizard" version="~0.2.11" />
 </widget>
