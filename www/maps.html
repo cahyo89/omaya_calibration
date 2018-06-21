@@ -367,12 +367,14 @@ console.log("Result : "+JSON.stringify(x));
               WifiWizard.getScanResults(function(z){
 
                 for (var i = z.length - 1; i >= 0; i--) {
-console.log("Result : "+JSON.stringify({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']}));
+console.log("omaya : "+JSON.stringify({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']}));
                   omaya_networks.concat(JSON.stringify({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']}));
 
                 }
 
-                // navigator.accelerometer.getCurrentAcceleration(function(x){
+
+console.log("omaya : "+JSON.stringify(omaya_networks));     
+           // navigator.accelerometer.getCurrentAcceleration(function(x){
                   
                       if (timeOut > timeOutSec) {
                            $.ajax({
@@ -398,7 +400,7 @@ console.log("Result : "+JSON.stringify({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSI
                                 // x_acce        : x.x,
                                 // y_acce        : x.y,
                                 // z_acce        : x.z,
-                                surround      : encodeURIComponent(btoa(JSON.stringify(omaya_networks)))
+                                surround      : encodeURIComponent(btoa((omaya_networks)))
                               },
                               success: function(returnValue){
                                 updateResult = $.parseJSON(returnValue);
