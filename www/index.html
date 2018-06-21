@@ -112,7 +112,7 @@
             if (result['status'] == "success") {
 
               localData.setItem("omaya-credential", result['hash_code']);
-              localData.setItem("omaya-site", JSON.stringify(result['site']));
+              localData.setItem("omaya-site", result['site']);
 
               localData.setItem("omaya-server",   server_ip);
               localData.setItem("omaya-username", $("#username").val());
