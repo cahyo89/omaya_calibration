@@ -368,7 +368,7 @@ console.log("Result : "+JSON.stringify(x));
 
                 for (var i = z.length - 1; i >= 0; i--) {
 console.log("Result : "+JSON.stringify({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']}));
-                  omaya_networks.push({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']});
+                  omaya_networks.push(JSON.stringify({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSID'], "RSSI": z[i]['level']}));
 
                 }
 
