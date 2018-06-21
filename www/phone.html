@@ -129,7 +129,7 @@
 
       window.MacAddress.getMacAddress(function(macAddress) {$("#macaddress").val(macAddress);},function(fail) {alert(fail);});
 
-      var site_list =JSON.stringify(localData.getItem("omaya-site"));
+      var site_list =JSON.stringify([localData.getItem("omaya-site")]);
       console.log(site_list);
       for (var i = site_list.length - 1; i >= 0; i--) {
       console.log(site_list[i]);
