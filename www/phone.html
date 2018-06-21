@@ -132,11 +132,11 @@
       var site_list = $.parseJSON(localData.getItem("omaya-site"));
 
       for (var i = site_list.length - 1; i >= 0; i--) {
-        $("#site").append($("<option value='" + site_list[i] + "'>" + site_list[i].toUpperCase() + "</option>"));
+        $("#site").append($("<option value='" + site_list[i].venue_id + "'>" + site_list[i].venue_name.toUpperCase() + "</option>"));
       }
 
 
-      $("#site").val(site_list[0].toUpperCase());
+      $("#site").val(site_list[0].venue_name.toUpperCase());
       $("#manufacturer").val(device.manufacturer.toUpperCase());
       $("#model").val(device.model.toUpperCase());
       $("#platform").val(device.platform.toUpperCase());
