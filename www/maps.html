@@ -400,7 +400,7 @@ console.log("omaya : "+JSON.stringify(omaya_networks));
                                 // x_acce        : x.x,
                                 // y_acce        : x.y,
                                 // z_acce        : x.z,
-                                surround      : encodeURIComponent(btoa((omaya_networks)))
+                                surround      : encodeURIComponent(btoa(JSON.stringify(omaya_networks)))
                               },
                               success: function(returnValue){
                                 updateResult = $.parseJSON(returnValue);
