@@ -106,6 +106,7 @@
 
     // from phone.html
     var calibrate_site  = localData.getItem("omaya-site-selected");
+    var calibrate_site_name  = localData.getItem("omaya-site-name-selected");
     var token_code      = localData.getItem("omaya-credential");
     var omaya_server    = localData.getItem("omaya-server");
     var mac_address     = localData.getItem("omaya-mac-address");
@@ -131,7 +132,7 @@
 
     function onDeviceReady(){
 
-      $("#site-name").html(" ( " + calibrate_site + " )");
+      $("#site-name").html(" ( " + calibrate_site_name + " )");
 
       $("#map_viewport").css("width", $(window).width() + "px");
       $("#map_viewport").css("height", $(window).height() + "px");

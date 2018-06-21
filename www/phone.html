@@ -129,14 +129,15 @@
 
       window.MacAddress.getMacAddress(function(macAddress) {$("#macaddress").val(macAddress);},function(fail) {alert(fail);});
 
-      var site_list = $.parseJSON(localData.getItem("omaya-site"));
-
+      var site_list =(localData.getItem("omaya-site"));
+      console.log(site_list);
       for (var i = site_list.length - 1; i >= 0; i--) {
-        $("#site").append($("<option value='" + site_list[i].venue_id + "'>" + site_list[i].venue_name.toUpperCase() + "</option>"));
+        var detail_site=JSON.parse(site_list[i]);
+        $("#site").append($("<option value='" + detail_site.venue_id + "'>" + detail_site.venue_name.toUpperCase() + "</option>"));
       }
 
 
-      $("#site").val(site_list[0].venue_name.toUpperCase());
+      // $("#site").val(site_list[0].venue_name.toUpperCase());
       $("#manufacturer").val(device.manufacturer.toUpperCase());
       $("#model").val(device.model.toUpperCase());
       $("#platform").val(device.platform.toUpperCase());
@@ -152,10 +153,12 @@
         var localData = window.localStorage;
 
         var venue_checked = $("select").val();
+        var venue_name_checked = $("select option:selected").text();
 
-        if (venue_checked !== "Select Venue" && venue_checked !== null) {
+        if (venue_name_checked !== "Select Venue" && venue_name_checked !== null) {
           
           localData.setItem("omaya-site-selected", venue_checked);
+          localData.setItem("omaya-site-name-selected", venue_name_checked);
           localData.setItem("omaya-mac-address", $("#macaddress").val());
           location.href = "maps.html";
 
