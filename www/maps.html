@@ -372,8 +372,6 @@ console.log("Result : "+JSON.stringify({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSI
 
                 }
 
-                omaya_networks = encodeURIComponent(btoa(JSON.stringify(omaya_networks)));
-
                 // navigator.accelerometer.getCurrentAcceleration(function(x){
                   
                       if (timeOut > timeOutSec) {
@@ -400,7 +398,7 @@ console.log("Result : "+JSON.stringify({"SSID": z[i]['SSID'],"BSSID": z[i]['BSSI
                                 // x_acce        : x.x,
                                 // y_acce        : x.y,
                                 // z_acce        : x.z,
-                                surround      : omaya_networks
+                                surround      : encodeURIComponent(btoa(JSON.stringify(omaya_networks)))
                               },
                               success: function(returnValue){
                                 updateResult = $.parseJSON(returnValue);
