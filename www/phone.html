@@ -130,16 +130,9 @@
       window.MacAddress.getMacAddress(function(macAddress) {$("#macaddress").val(macAddress);},function(fail) {alert(fail);});
 
       var site_list =$.parseJSON([localData.getItem("omaya-site")]);
-      console.log(site_list);
-      console.log(localData.getItem("omaya-site"));
-      // for (var i = site_list.length - 1; i >= 0; i--) {
-      // console.log(site_list[i]);
-      //   var detail_site=$.parseJSON(site_list[i]);
-      //   $("#site").append($("<option value='" + detail_site.venue_id + "'>" + detail_site.venue_name.toUpperCase() + "</option>"));
-      // }
-$.each(site_list,function( index, value ) {
-$("#site").append($("<option value='" + value.venue_id + "'>" + value.venue_name.toUpperCase() + "</option>"));
-});
+      $.each(site_list,function( index, value ) {
+      $("#site").append($("<option value='" + value.venue_id + "'>" + value.venue_name.toUpperCase() + "</option>"));
+      });
 
       // $("#site").val(site_list[0].venue_name.toUpperCase());
       $("#manufacturer").val(device.manufacturer.toUpperCase());

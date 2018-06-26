@@ -176,7 +176,7 @@
       if (x == 1) {
 
         $.ajax({
-          url: "http://" + omaya_server + "/calibration/capture/reset.php?site=" +  calibrate_site + "&token=" + token_code,
+          url: "http://" + omaya_server + "/calibration/reset_calibration/" + token_code+ "/" + calibrate_site  ,
           method: "GET",
           success: function(x){
 
@@ -454,9 +454,9 @@ console.log("omaya : "+JSON.stringify(omaya_networks));
     }
 
     function complete_calibration(){
-
+      window.plugins.spinnerDialog.show(null, "Please wait. We are calculating all data.", true);
         $.ajax({
-            url: "http://" + omaya_server + "/calibration/capturing/"+token_code+"/",
+            url: "http://" + omaya_server + "/calibration/finish_capture/"+token_code+"/",
             method: "POST",
             data:{
                 token         : token_code,
@@ -464,7 +464,7 @@ console.log("omaya : "+JSON.stringify(omaya_networks));
                 status        : "complete"
             },
             success: function(x){
-
+               window.plugins.spinnerDialog.hide();
                 navigator.notification.alert("Calibration has been saved.", null, "SUCCESS", "OK");
                 location.href = "index.html";
 
