@@ -50,7 +50,7 @@
             </a>
 
             <a class="last nav-menu-link w-clearfix w-inline-block" data-load="1" href="#" onclick="reset_cal();">
-              <div class="icon-list-menure-scan with interval (5)">
+              <div class="icon-list-menu re-scan with interval (5)">
                 <div class="icon ion-ios-bookmarks-outline"></div>
               </div>
               <div class="nav-menu-titles">Reset Calibration</div>
@@ -464,13 +464,13 @@ console.log("omaya : "+JSON.stringify(omaya_networks));
                 status        : "complete"
             },
             success: function(x){
-               window.plugins.spinnerDialog.hide();
+                window.plugins.spinnerDialog.hide();
                 navigator.notification.alert("Calibration has been saved.", null, "SUCCESS", "OK");
-              //  location.href = "index.html";
+               location.href = "index.html";
 
             },
             error: function(x){
-
+                window.plugins.spinnerDialog.hide();
                 navigator.notification.alert("There is an error to saved your calibration. Please retry.", null, "ERROR", "OK");
 
             }
