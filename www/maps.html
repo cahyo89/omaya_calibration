@@ -463,11 +463,15 @@ console.log("omaya : "+JSON.stringify(omaya_networks));
                 site          : calibrate_site,
                 status        : "complete"
             },
-            success: function(x){
-                window.plugins.spinnerDialog.hide();
-                navigator.notification.alert("Calibration has been saved.", null, "SUCCESS", "OK");
-               location.href = "index.html";
+            success: function(returnValue){
+              updateResult = $.parseJSON(returnValue);
 
+              if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
+                navigator.notification.alert(updateResult['message'], null, "SUCCESS", "OK");
+                 location.href = "phone.html";
+              } else {
+                navigator.notification.alert(updateResult['message'], null, "ERROR", "OK");
+              }
             },
             error: function(x){
                 window.plugins.spinnerDialog.hide();
