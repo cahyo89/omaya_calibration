@@ -465,7 +465,7 @@ console.log("omaya : "+JSON.stringify(omaya_networks));
             },
             success: function(returnValue){
               updateResult = $.parseJSON(returnValue);
-
+              window.plugins.spinnerDialog.hide();
               if (typeof(updateResult) == "object" && updateResult['status'] == "success") {
                 navigator.notification.alert(updateResult['message'], null, "SUCCESS", "OK");
                  location.href = "phone.html";
